@@ -25,8 +25,6 @@ If you replace the format string to it polish version
 ```  
 function will return `"Zażądano 3.5 rubla"`, `"Zażądano 1 rubel"` and `"Zażądano 0 rubli"` for the same values of `{0}` argument.  
   
-Note that different languages use different numbers of gramatical number forms: 3 in Russian, 2 in English, 4 in Polish, and inflection rules depends of language.
-
 ```cs
 using orlum.TypographyHelper;
     
@@ -64,7 +62,15 @@ Zażądano 0 rubli
 */
 ```
 
+Note that different languages use different numbers of gramatical number forms and inflection rules depends of language.  
+* For English you should specify singular and plural forms of the inflected phrase in that exact order, for example `{0:NP;en;cow;cows}`.  
+* For Polish you should specify 4 forms of a phrase inflected for number and splited by semicolon. Specify inflections of the phrase required to be compatible with numbers 1, 2, 5 and ½ in that exact order, for example `{0:NP;pl;litr;litry;litrów;litra}`.  
+* For Russian you should specify 3 forms of the phrase inflected for number and splited by semicolon. Specify inflections of the phrase required to be compatible with numbers 1, 2 and 5 in that exact order, for example `{0:NP;ru;рубль;рубля;рублей}`.  
+
 You can continue to use predefined set of format strings with NumericalPhraseFormatter. 
 NumericalPhraseFormatter just adds new Format String `NP` that allows to select compatible to the given number form of phrase.  
-NumericalPhraseFormatter works independently of current culture, you specify language directly in the format string after `NP` tag: `{0:NP;EN;ruble;rubles}` 
-but predefined set of format strings is culture-sensitive and you should specify cultureInfo in NumericalPhraseFormatter constructor `var f = new NumericalPhraseFormatter(CultureInfo.InvariantCulture);`.
+NumericalPhraseFormatter works independently of current culture, you specify language directly in the format string after `NP` tag: `{0:NP;EN;ruble;rubles}`, 
+but predefined set of format strings is culture-sensitive and you should specify cultureInfo in NumericalPhraseFormatter constructor
+```cs
+var f = new NumericalPhraseFormatter(CultureInfo.InvariantCulture);
+```
