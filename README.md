@@ -67,10 +67,27 @@ Note that different languages use different numbers of gramatical number forms a
 * For Polish you should specify 4 forms of a phrase inflected for number and splited by semicolon. Specify inflections of the phrase required to be compatible with numbers 1, 2, 5 and ½ in that exact order, for example `{0:NP;pl;litr;litry;litrów;litra}`.  
 * For Russian you should specify 3 forms of the phrase inflected for number and splited by semicolon. Specify inflections of the phrase required to be compatible with numbers 1, 2 and 5 in that exact order, for example `{0:NP;ru;рубль;рубля;рублей}`.  
 
-You can continue to use predefined set of format strings with NumericalPhraseFormatter. 
+You can continue to use predefined set of format strings with NumericalPhraseFormatter, 
 NumericalPhraseFormatter just adds new Format String `NP` that allows to select compatible to the given number form of phrase.  
 NumericalPhraseFormatter works independently of current culture, you specify language directly in the format string after `NP` tag: `{0:NP;EN;ruble;rubles}`, 
 but predefined set of format strings is culture-sensitive and you should specify cultureInfo in NumericalPhraseFormatter constructor
 ```cs
-var f = new NumericalPhraseFormatter(CultureInfo.InvariantCulture);
+using orlum.TypographyHelper;
+    
+public class NumericalPhraseFormatterExample
+{
+	public static void Main()
+	{
+		Console.WriteLine(string.Format(new NumericalPhraseFormatter(CultureInfo.GetCultureInfo("en-US")), "Requested {0} {0:NP;EN;ruble;rubles}", 3.5));
+		Console.WriteLine(string.Format(new NumericalPhraseFormatter(CultureInfo.GetCultureInfo("ru-RU")), "Requested {0} {0:NP;EN;ruble;rubles}", 3.5));
+	}
+}
+    
+/*
+This code produces the following output.
+     
+Requested 3.5 rubles
+Requested 3,5 rubles
+     
+*/
 ```
