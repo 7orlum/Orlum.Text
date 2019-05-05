@@ -5,18 +5,18 @@ using System.Text;
 namespace orlum.TypographyHelper
 {
     /// <summary>
-    /// Interface to supply <see cref="NumericalPhraseFormatter"/> language-specific number agreement information
+    /// Interface to supply <see cref="NumericalPhraseFormatter"/> language-specific number agreement information.
     /// </summary>
     public interface INumberAgreement
     {
         /// <summary>
-        /// Enumerate all the available gramatical number forms in a specific language 
+        /// Enumerate all the available gramatical number forms in the language.
         /// </summary>
         GramaticalNumber[] AvailableForms { get; }
 
 
         /// <summary>
-        /// Finds the concord gramatical number to agree numerical phrase with specified number
+        /// Finds the concord gramatical number to agree numerical phrase with specified number.
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
@@ -24,7 +24,7 @@ namespace orlum.TypographyHelper
 
 
         /// <summary>
-        /// Describes how to write correct format string for this language
+        /// Describes how to get correct format string.
         /// </summary>
         string DescriptionOfFormatString { get; }
     }

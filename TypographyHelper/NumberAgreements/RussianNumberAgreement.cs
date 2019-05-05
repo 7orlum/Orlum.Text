@@ -6,7 +6,7 @@ using System.Diagnostics.Contracts;
 namespace orlum.TypographyHelper
 {
     /// <summary>
-    /// Implementation of <see cref="INumberAgreement"/> for contemporary Russian language
+    /// Implementation of <see cref="INumberAgreement"/> for contemporary Russian.
     /// <remarks>
     /// In Russian, the form of noun following the numeral is nominative singular if the numeral ends in "one", genitive singular if the numeral ends in "two" to "four", and genitive plural otherwise. 
     /// As an exception, the form of noun is also genitive plural if the numeral ends in 11 to 14. 
@@ -17,13 +17,13 @@ namespace orlum.TypographyHelper
     public class RussianNumberAgreement : INumberAgreement
     {
         /// <summary>
-        /// Enumerate three available gramatical number forms in Russian language 
+        /// Enumerate three available gramatical number forms in Russian.
         /// </summary>
         public GramaticalNumber[] AvailableForms => new GramaticalNumber[] { GramaticalNumber.Singular, GramaticalNumber.Paucal, GramaticalNumber.Plural };
 
 
         /// <summary>
-        /// Finds the concord gramatical number to agree numerical phrase with specified number
+        /// Finds the concord gramatical number to agree numerical phrase with specified number.
         /// </summary>
         public GramaticalNumber ConcordForm(double number)
         {
@@ -53,7 +53,7 @@ namespace orlum.TypographyHelper
 
 
         /// <summary>
-        /// Describes how to write correct format string for this language
+        /// Describes how to get correct format string.
         /// </summary>
         public string DescriptionOfFormatString =>
             $"Expected {AvailableForms.Length} forms of a phrase inflected for number and splited by semicolon. " +

@@ -6,7 +6,7 @@ using System.Diagnostics.Contracts;
 namespace orlum.TypographyHelper
 {
     /// <summary>
-    /// Implementation of <see cref="INumberAgreement"/> for contemporary Polish language
+    /// Implementation of <see cref="INumberAgreement"/> for contemporary Polish.
     /// <remarks>
     /// In Polish numerals from "two" to "four" are always followed by a noun in the same plural case, but higher numerals (if in the nominative) are followed by a noun in the genitive plural.
     /// Fractional numerals (if in the nominative) are followed by a noun in the genitive singular.
@@ -15,14 +15,14 @@ namespace orlum.TypographyHelper
     public class PolishNumberAgreement : INumberAgreement
     {
         /// <summary>
-        /// Enumerate three available gramatical number forms in Polish language 
+        /// Enumerate four available gramatical number forms in Polish 
         /// </summary>
         public GramaticalNumber[] AvailableForms => 
             new GramaticalNumber[] { GramaticalNumber.Singular, GramaticalNumber.Paucal, GramaticalNumber.Plural, GramaticalNumber.Fractional };
 
 
         /// <summary>
-        /// Finds the concord gramatical number to agree numerical phrase with specified number
+        /// Finds the concord gramatical number to agree numerical phrase with specified number.
         /// </summary>
         public GramaticalNumber ConcordForm(double number)
         {
@@ -46,7 +46,7 @@ namespace orlum.TypographyHelper
 
 
         /// <summary>
-        /// Describes how to write correct format string for this language
+        /// Describes how to get correct format string.
         /// </summary>
         public string DescriptionOfFormatString => 
             $"Expected {AvailableForms.Length} forms of a phrase inflected for number and splited by semicolon. " +

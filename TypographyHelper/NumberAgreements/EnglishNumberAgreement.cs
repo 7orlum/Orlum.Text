@@ -18,13 +18,13 @@ namespace orlum.TypographyHelper
     public class EnglishNumberAgreement : INumberAgreement
     {
         /// <summary>
-        /// Enumerate two available gramatical number forms in English language 
+        /// Enumerate two available gramatical number forms in English. 
         /// </summary>
         public GramaticalNumber[] AvailableForms => new GramaticalNumber[] { GramaticalNumber.Singular, GramaticalNumber.Plural };
 
 
         /// <summary>
-        /// Finds the concord gramatical number to agree numerical phrase with specified number
+        /// Finds the concord gramatical number to agree numerical phrase with specified number.
         /// </summary>
         public GramaticalNumber ConcordForm(double number)
         {
@@ -50,7 +50,7 @@ namespace orlum.TypographyHelper
 
 
         /// <summary>
-        /// Describes how to write correct format string for this language
+        /// Describes how to get correct format string.
         /// </summary>
         public string DescriptionOfFormatString => "Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;en;cow;cows}";
     }
