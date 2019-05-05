@@ -70,7 +70,8 @@ Note that different languages use different numbers of gramatical number forms a
 You can continue to use predefined set of format strings with NumericalPhraseFormatter, 
 NumericalPhraseFormatter just adds new Format String `NP` that allows to select compatible to the given number form of phrase.  
 NumericalPhraseFormatter works independently of current culture, you specify language directly in the format string after `NP` tag: `{0:NP;EN;ruble;rubles}`, 
-but predefined set of format strings is culture-sensitive and you should specify cultureInfo in NumericalPhraseFormatter constructor
+but predefined set of format strings is culture-sensitive and you should specify `cultureInfo` in NumericalPhraseFormatter constructor. When `cultireInfo` is not specified it obtain the current locale setting of the operating system.
+
 ```cs
 using orlum.TypographyHelper;
     
