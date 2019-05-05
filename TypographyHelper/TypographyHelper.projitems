@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>7776c894-7d63-4530-b44d-8860555ee543</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>TypographyHelper</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\NumberAgreements\EnglishNumberAgreement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\GramaticalNumber.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\INumberAgreement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NumericalPhraseFormatter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\NumberAgreements\PolishNumberAgreement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\NumberAgreements\RussianNumberAgreement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StringExtention.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StringHelper.cs" />
+  </ItemGroup>
+</Project>

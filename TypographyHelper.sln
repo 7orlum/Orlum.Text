@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypographyHelper.Tests.Unit", "TypographyHelper.Tests.Unit\TypographyHelper.Tests.Unit.csproj", "{51C7C269-EEFB-4111-A919-59A92804A8B2}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TypographyHelper", "TypographyHelper\TypographyHelper.shproj", "{7776C894-7D63-4530-B44D-8860555EE543}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{080A218F-6A45-41F0-9E02-167FF98759F1}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		TypographyHelper\TypographyHelper.projitems*{7776c894-7d63-4530-b44d-8860555ee543}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51C7C269-EEFB-4111-A919-59A92804A8B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51C7C269-EEFB-4111-A919-59A92804A8B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51C7C269-EEFB-4111-A919-59A92804A8B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51C7C269-EEFB-4111-A919-59A92804A8B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1D683EB-DEDB-4852-AB14-4FF74A47C003}
+	EndGlobalSection
+EndGlobal
