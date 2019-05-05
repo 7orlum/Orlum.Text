@@ -3,7 +3,7 @@
 NumericalPhraseFormatter class is the main part of TypographyHelper. 
 You can use it to internationalize programs or generate the correct matched phrases in accordance with language agreement.
 NumericalPhraseFormatter is a ICustomFormatter that choose the correct form of the phrase depending on the given numeric argument. 
-English, Polish and Russian language number agreements are now implemented.
+English, Polish and Russian language number agreements are now implemented. You can add new languages by implementing INumberAgreement interface.
 
 # How can it be used?
 
