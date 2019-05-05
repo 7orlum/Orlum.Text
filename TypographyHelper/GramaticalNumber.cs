@@ -9,7 +9,7 @@ namespace orlum.TypographyHelper
     /// English and other languages present number categories of singular or plural, both of which are cited by using the hash sign (#) or by the numero signs "No." and "Nos." respectively. 
     /// Some languages also have a dual, trial, and paucal number or other arrangements.
     /// </summary>
-    internal enum GramaticalNumber
+    public enum GramaticalNumber
     {
         /// <summary>The singular, for one instance of a concept.</summary>
         Singular,

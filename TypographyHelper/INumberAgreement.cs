@@ -7,7 +7,7 @@ namespace orlum.TypographyHelper
     /// <summary>
     /// Interface to supply <see cref="NumericalPhraseFormatter"/> language-specific number agreement information
     /// </summary>
-    internal interface INumberAgreement
+    public interface INumberAgreement
     {
         /// <summary>
         /// Enumerate all the available gramatical number forms in a specific language 

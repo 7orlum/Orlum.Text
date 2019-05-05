@@ -15,7 +15,7 @@ namespace orlum.TypographyHelper
     /// English treats zero with the plural number. Old English did contain dual grammatical numbers.
     /// </remarks>
     /// </summary>
-    internal class EnglishNumberAgreement : INumberAgreement
+    public class EnglishNumberAgreement : INumberAgreement
     {
         /// <summary>
         /// Enumerate two available gramatical number forms in English language 

@@ -9,12 +9,12 @@
     <Import_RootNamespace>TypographyHelper</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\NumberAgreements\EnglishNumberAgreement.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\GramaticalNumber.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\INumberAgreement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NumberAgreements\EnglishNumberAgreement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GramaticalNumber.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)INumberAgreement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NumericalPhraseFormatter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\NumberAgreements\PolishNumberAgreement.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Internal\NumberAgreements\RussianNumberAgreement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NumberAgreements\PolishNumberAgreement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NumberAgreements\RussianNumberAgreement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StringExtention.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StringHelper.cs" />
   </ItemGroup>

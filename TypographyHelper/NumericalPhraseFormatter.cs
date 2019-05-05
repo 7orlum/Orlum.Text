@@ -57,6 +57,16 @@ namespace orlum.TypographyHelper
 
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="NumericalPhraseFormatter"/> class with custom set of number agreements and culture information.
+        /// </summary>
+        public NumericalPhraseFormatter(Dictionary<string, INumberAgreement> numberAgreements, CultureInfo cultureInfo = null)
+        {
+            CultureInfo = cultureInfo;
+            _numberAgreements = new Dictionary<string, INumberAgreement>(numberAgreements, StringComparer.OrdinalIgnoreCase);
+        }
+
+
+        /// <summary>
         /// Returns an object that provides formatting services for the specified type.
         /// </summary>
         /// <param name="formatType">An object that specifies the type of format object to return.</param>
@@ -81,6 +91,7 @@ namespace orlum.TypographyHelper
         /// <param name="formatProvider">An object that supplies format information about the current instance.</param>
         /// <exception cref="ArgumentException">The value of <paramref name="arg"/> is not convertable to double.</exception>
         /// <exception cref="FormatException">Format string is incorrect.</exception>
+        /// <exception cref="KeyNotFoundException">Number agreement for specifiied language is not found.</exception>
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
             Contract.Ensures(Contract.Result<string>() != null);
@@ -96,7 +107,7 @@ namespace orlum.TypographyHelper
             if (!match.Success)
                 return HandleOtherFormats(format, arg);
 
-            var agreement = _numberAgreements[match.Groups["language"].Value.ToLower()];
+            var agreement = _numberAgreements[match.Groups["language"].Value];
 
             if (match.Groups["form"].Captures.Count != agreement.AvailableForms.Length)
                 throw new FormatException(agreement.DescriptionOfFormatString);

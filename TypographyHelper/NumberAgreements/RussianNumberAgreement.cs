@@ -14,7 +14,7 @@ namespace orlum.TypographyHelper
     /// for example, восемь мегабайт, пять килограмм and пять килограммов, три ряда́ and три ря́да, and полтора часа́.
     /// </remarks>
     /// </summary>
-    internal class RussianNumberAgreement : INumberAgreement
+    public class RussianNumberAgreement : INumberAgreement
     {
         /// <summary>
         /// Enumerate three available gramatical number forms in Russian language 

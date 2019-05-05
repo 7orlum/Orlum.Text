@@ -109,5 +109,20 @@ namespace TypographyHelper.Tests.Unit
             var e = Assert.Throws<KeyNotFoundException>(() => string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number));
             Assert.Equal(expected, e.Message);
         }
+
+
+        [Fact]
+        public void AllowsCustomSetOfNumberAgreements()
+        {
+            var numberAgreements = new Dictionary<string, INumberAgreement>();
+            numberAgreements.Add("ru", new RussianNumberAgreement());
+            numberAgreements.Add("EN", new EnglishNumberAgreement());
+
+            var formatter = new NumericalPhraseFormatter(numberAgreements, CultureInfo.InvariantCulture);
+
+            Assert.Equal("I have got 1 cat", string.Format(formatter, "I have got {0} {0:NP;en;cat;cats}", 1));
+            Assert.Equal("Запрошено 6 рублей", string.Format(formatter, "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;ru;рубль;рубля;рублей}", 6));
+            Assert.Throws<KeyNotFoundException>(() => string.Format(formatter, "Zażądano {0} {0:NP;PL;rubel;ruble;rubli;rubla}", 1));
+        }
     }
 }

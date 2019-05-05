@@ -12,7 +12,7 @@ namespace orlum.TypographyHelper
     /// Fractional numerals (if in the nominative) are followed by a noun in the genitive singular.
     /// </remarks>
     /// </summary>
-    internal class PolishNumberAgreement : INumberAgreement
+    public class PolishNumberAgreement : INumberAgreement
     {
         /// <summary>
         /// Enumerate three available gramatical number forms in Polish language 
