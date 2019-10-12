@@ -24,7 +24,7 @@ namespace orlum.TypographyHelper.StringExtention
         /// </remarks>
         public static string CapitalizeFirstLetter(this string value)
         {
-            return StringHelper.CapitalizeFirstLetter(value);
+            return StringHelper.CapitalizeFirstLetter(value, CultureInfo.CurrentCulture);
         }
 
 
@@ -60,7 +60,7 @@ namespace orlum.TypographyHelper.StringExtention
         /// </remarks>
         public static string UncapitalizeFirstLetter(this string value)
         {
-            return StringHelper.UncapitalizeFirstLetter(value);
+            return StringHelper.UncapitalizeFirstLetter(value, CultureInfo.CurrentCulture);
         }
 
 

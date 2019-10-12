@@ -9,7 +9,7 @@ namespace orlum.TypographyHelper
     /// <summary>
     /// Auxiliary functions for formatting strings
     /// </summary>
-    public class StringHelper
+    public static class StringHelper
     {
         /// <summary>
         /// Concatenates all the elements of a string array, using the specified separator between each element.
@@ -54,6 +54,9 @@ namespace orlum.TypographyHelper
         public static string Join(string[] value, string separator, string lastSeparator = null, 
             string separatorBeforeNullAndEmptyValue = null, bool skipNullAndEmptyValues = false, string replaceNullAndEmptyValuesWith = null)
         {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
             var result = new StringBuilder(value.Length * 2);
 
             string previousValue = null;
@@ -141,13 +144,7 @@ namespace orlum.TypographyHelper
         /// </remarks>
         public static string CapitalizeFirstLetter(string value)
         {
-            if (String.IsNullOrEmpty(value))
-                return value;
-
-            if (value.Length == 1)
-                return value.ToUpper();
-            else
-                return value.Remove(1).ToUpper() + value.Remove(0, 1);
+            return CapitalizeFirstLetter(value, CultureInfo.CurrentCulture);
         }
 
 
@@ -164,7 +161,7 @@ namespace orlum.TypographyHelper
         /// <exception cref="ArgumentNullException"><paramref name="culture"/> is <see langword="null"/></exception>
         public static string CapitalizeFirstLetter(string value, CultureInfo culture)
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
                 return value;
 
             if (value.Length == 1)
@@ -189,13 +186,7 @@ namespace orlum.TypographyHelper
         /// </remarks>
         public static string UncapitalizeFirstLetter(string value)
         {
-            if (String.IsNullOrEmpty(value))
-                return value;
-
-            if (value.Length == 1)
-                return value.ToLower();
-            else
-                return value.Remove(1).ToLower() + value.Remove(0, 1);
+            return UncapitalizeFirstLetter(value, CultureInfo.CurrentCulture);
         }
 
 
@@ -212,7 +203,7 @@ namespace orlum.TypographyHelper
         /// <exception cref="ArgumentNullException"><paramref name="culture"/> is <see langword="null"/></exception>
         public static string UncapitalizeFirstLetter(string value, CultureInfo culture)
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
                 return value;
 
             if (value.Length == 1)

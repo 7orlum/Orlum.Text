@@ -116,7 +116,7 @@ namespace orlum.TypographyHelper
 
             try
             {
-                number = Convert.ToDouble(arg);
+                number = Convert.ToDouble(arg, CultureInfo.InvariantCulture);
             }
             catch (Exception e)
             {
