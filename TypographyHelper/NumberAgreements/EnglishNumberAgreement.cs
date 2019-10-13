@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.Contracts;
 
 
@@ -15,36 +16,36 @@ namespace orlum.TypographyHelper
     /// English treats zero with the plural number. Old English did contain dual grammatical numbers.
     /// </remarks>
     /// </summary>
-    public class EnglishNumberAgreement : INumberAgreement
+    public sealed class EnglishNumberAgreement : INumberAgreement
     {
         /// <summary>
-        /// Enumerate two available gramatical number forms in English. 
+        /// Enumerates all distinguishing grammatical number values in the English language.
         /// </summary>
-        public GramaticalNumber[] AvailableForms => new GramaticalNumber[] { GramaticalNumber.Singular, GramaticalNumber.Plural };
+        public IList<GrammaticalNumber> GrammaticalNumbers => new ImmutableArray<GrammaticalNumber> { GrammaticalNumber.Singular, GrammaticalNumber.Plural };
 
 
         /// <summary>
-        /// Finds the concord gramatical number to agree numerical phrase with specified number.
+        /// Finds the concord grammatical number value to agree numerical phrase with specified number.
         /// </summary>
-        public GramaticalNumber ConcordForm(double number)
+        public GrammaticalNumber MatchGrammaticalNumber(double number)
         {
-            Contract.Ensures(AvailableForms.Contains(Contract.Result<GramaticalNumber>()));
+            Contract.Ensures(GrammaticalNumbers.Contains(Contract.Result<GrammaticalNumber>()));
 
             if (Math.Truncate(number) == number)
             {
                 //Integer numbers
                 if (Math.Abs(number) == 1)
-                    return GramaticalNumber.Singular;
+                    return GrammaticalNumber.Singular;
                 else
-                    return GramaticalNumber.Plural;
+                    return GrammaticalNumber.Plural;
             }
             else
             {
                 //Fractional numbers
                 if (Math.Truncate(number) == 0)
-                    return GramaticalNumber.Singular;
+                    return GrammaticalNumber.Singular;
                 else
-                    return GramaticalNumber.Plural;
+                    return GrammaticalNumber.Plural;
             }
         }
 
@@ -52,6 +53,6 @@ namespace orlum.TypographyHelper
         /// <summary>
         /// Describes how to get correct format string.
         /// </summary>
-        public string DescriptionOfFormatString => "Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;en;cow;cows}";
+        public string DescriptionOfFormatString => "Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;EN;cow;cows}";
     }
 }

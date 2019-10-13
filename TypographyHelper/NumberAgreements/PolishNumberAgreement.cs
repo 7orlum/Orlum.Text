@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.Contracts;
 
 
@@ -12,35 +13,35 @@ namespace orlum.TypographyHelper
     /// Fractional numerals (if in the nominative) are followed by a noun in the genitive singular.
     /// </remarks>
     /// </summary>
-    public class PolishNumberAgreement : INumberAgreement
+    public sealed class PolishNumberAgreement : INumberAgreement
     {
         /// <summary>
-        /// Enumerate four available gramatical number forms in Polish 
+        /// Enumerates all distinguishing grammatical number values in the Polish language.
         /// </summary>
-        public GramaticalNumber[] AvailableForms => 
-            new GramaticalNumber[] { GramaticalNumber.Singular, GramaticalNumber.Paucal, GramaticalNumber.Plural, GramaticalNumber.Fractional };
+        public IList<GrammaticalNumber> GrammaticalNumbers => 
+            new ImmutableArray<GrammaticalNumber> { GrammaticalNumber.Singular, GrammaticalNumber.Paucal, GrammaticalNumber.Plural, GrammaticalNumber.Fractional };
 
 
         /// <summary>
-        /// Finds the concord gramatical number to agree numerical phrase with specified number.
+        /// Finds the concord grammatical number value to agree numerical phrase with specified number.
         /// </summary>
-        public GramaticalNumber ConcordForm(double number)
+        public GrammaticalNumber MatchGrammaticalNumber(double number)
         {
-            Contract.Ensures(AvailableForms.Contains(Contract.Result<GramaticalNumber>()));
+            Contract.Ensures(GrammaticalNumbers.Contains(Contract.Result<GrammaticalNumber>()));
 
             //Fractional numbers
             if (Math.Round(number) != number)
-                return GramaticalNumber.Fractional;
+                return GrammaticalNumber.Fractional;
 
             //Integer numbers
             switch (Math.Abs(number))
             {
                 case 1:
-                    return GramaticalNumber.Singular;
+                    return GrammaticalNumber.Singular;
                 case double n when n > 1 && n < 5:
-                    return GramaticalNumber.Paucal;
+                    return GrammaticalNumber.Paucal;
                 default:
-                    return GramaticalNumber.Plural;
+                    return GrammaticalNumber.Plural;
             }
         }
 
@@ -49,8 +50,8 @@ namespace orlum.TypographyHelper
         /// Describes how to get correct format string.
         /// </summary>
         public string DescriptionOfFormatString => 
-            $"Expected {AvailableForms.Length} forms of a phrase inflected for number and splited by semicolon. " +
+            $"Expected {GrammaticalNumbers.Count} forms of a phrase inflected for number and splited by semicolon. " +
             "Specify inflections of the phrase required to be compatible with numbers 1, 2, 5 and ½ in that exact order, " +
-            "for example {0:NP;pl;litr;litry;litrów;litra}";
+            "for example {0:NP;PL;litr;litry;litrów;litra}";
     }
 }

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+
 
 namespace orlum.TypographyHelper
 {
@@ -10,17 +9,17 @@ namespace orlum.TypographyHelper
     public interface INumberAgreement
     {
         /// <summary>
-        /// Enumerate all the available gramatical number forms in the language.
+        /// Enumerates all distinguishing grammatical number values in the language.
         /// </summary>
-        GramaticalNumber[] AvailableForms { get; }
+        IList<GrammaticalNumber> GrammaticalNumbers { get; }
 
 
         /// <summary>
-        /// Finds the concord gramatical number to agree numerical phrase with specified number.
+        /// Finds the concord grammatical number value to agree numerical phrase with specified number.
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        GramaticalNumber ConcordForm(double number);
+        GrammaticalNumber MatchGrammaticalNumber(double number);
 
 
         /// <summary>

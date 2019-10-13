@@ -109,7 +109,7 @@ namespace orlum.TypographyHelper
 
             var agreement = _numberAgreements[match.Groups["language"].Value];
 
-            if (match.Groups["form"].Captures.Count != agreement.AvailableForms.Length)
+            if (match.Groups["form"].Captures.Count != agreement.GrammaticalNumbers.Count)
                 throw new FormatException(agreement.DescriptionOfFormatString);
 
             double number;
@@ -123,7 +123,7 @@ namespace orlum.TypographyHelper
                 throw new ArgumentException("Argument must be convertable to double", e);
             }
 
-            var formIndex = Array.IndexOf(agreement.AvailableForms, agreement.ConcordForm(number));
+            var formIndex = agreement.GrammaticalNumbers.IndexOf(agreement.MatchGrammaticalNumber(number));
             return match.Groups["form"].Captures[formIndex].Value;
         }
 

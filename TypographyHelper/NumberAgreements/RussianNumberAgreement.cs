@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.Contracts;
 
 
@@ -14,39 +15,39 @@ namespace orlum.TypographyHelper
     /// for example, восемь мегабайт, пять килограмм and пять килограммов, три ряда́ and три ря́да, and полтора часа́.
     /// </remarks>
     /// </summary>
-    public class RussianNumberAgreement : INumberAgreement
+    public sealed class RussianNumberAgreement : INumberAgreement
     {
         /// <summary>
-        /// Enumerate three available gramatical number forms in Russian.
+        /// Enumerates all distinguishing grammatical number values in the Russian language.
         /// </summary>
-        public GramaticalNumber[] AvailableForms => new GramaticalNumber[] { GramaticalNumber.Singular, GramaticalNumber.Paucal, GramaticalNumber.Plural };
+        public IList<GrammaticalNumber> GrammaticalNumbers => new ImmutableArray<GrammaticalNumber> { GrammaticalNumber.Singular, GrammaticalNumber.Paucal, GrammaticalNumber.Plural };
 
 
         /// <summary>
-        /// Finds the concord gramatical number to agree numerical phrase with specified number.
+        /// Finds the concord grammatical number value to agree numerical phrase with specified number.
         /// </summary>
-        public GramaticalNumber ConcordForm(double number)
+        public GrammaticalNumber MatchGrammaticalNumber(double number)
         {
-            Contract.Ensures(AvailableForms.Contains(Contract.Result<GramaticalNumber>()));
+            Contract.Ensures(GrammaticalNumbers.Contains(Contract.Result<GrammaticalNumber>()));
 
             //Fractional numbers
             if (Math.Round(number) != number)
-                return GramaticalNumber.Paucal;
+                return GrammaticalNumber.Paucal;
 
             //Integer numbers
             switch (Math.Abs(number) % 100)
             {
                 case double n when n > 10 && n < 20:
-                    return GramaticalNumber.Plural;
+                    return GrammaticalNumber.Plural;
                 default:
                     switch (Math.Abs(number) % 10)
                     {
                         case 1:
-                            return GramaticalNumber.Singular;
+                            return GrammaticalNumber.Singular;
                         case double n when n > 1 && n < 5:
-                            return GramaticalNumber.Paucal;
+                            return GrammaticalNumber.Paucal;
                         default:
-                            return GramaticalNumber.Plural;
+                            return GrammaticalNumber.Plural;
                     }
             }
         }
@@ -56,8 +57,8 @@ namespace orlum.TypographyHelper
         /// Describes how to get correct format string.
         /// </summary>
         public string DescriptionOfFormatString =>
-            $"Expected {AvailableForms.Length} forms of a phrase inflected for number and splited by semicolon. " +
+            $"Expected {GrammaticalNumbers.Count} forms of a phrase inflected for number and splited by semicolon. " +
             "Specify inflections of the phrase required to be compatible with numbers 1, 2 and 5 in that exact order, " +
-            "for example {0:NP;ru;рубль;рубля;рублей}";
+            "for example {0:NP;RU;рубль;рубля;рублей}";
     }
 }
