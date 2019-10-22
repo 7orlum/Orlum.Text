@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-[assembly: InternalsVisibleTo("TypographyHelper.Tests.Unit")]
 
 
 namespace orlum.TypographyHelper

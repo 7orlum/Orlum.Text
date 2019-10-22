@@ -20,7 +20,17 @@ namespace orlum.TypographyHelper
         /// <summary>
         /// Enumerates all distinguishing grammatical number values in the Russian language.
         /// </summary>
-        public IList<GrammaticalNumber> GrammaticalNumbers => new ImmutableArray<GrammaticalNumber> { GrammaticalNumber.Singular, GrammaticalNumber.Paucal, GrammaticalNumber.Plural };
+        public IList<GrammaticalNumber> GrammaticalNumbers => ImmutableArray.Create<GrammaticalNumber>(
+            GrammaticalNumber.Singular, GrammaticalNumber.Paucal, GrammaticalNumber.Plural);
+
+
+        /// <summary>
+        /// Describes how to get correct format string.
+        /// </summary>
+        public string DescriptionOfFormatString =>
+            $"Expected {GrammaticalNumbers.Count} forms of a phrase inflected for number and splited by semicolon. " +
+            "Specify inflections of the phrase required to be compatible with numbers 1, 2 and 5 in that exact order, " +
+            "for example {0:NP;RU;рубль;рубля;рублей}";
 
 
         /// <summary>
@@ -51,14 +61,5 @@ namespace orlum.TypographyHelper
                     }
             }
         }
-
-
-        /// <summary>
-        /// Describes how to get correct format string.
-        /// </summary>
-        public string DescriptionOfFormatString =>
-            $"Expected {GrammaticalNumbers.Count} forms of a phrase inflected for number and splited by semicolon. " +
-            "Specify inflections of the phrase required to be compatible with numbers 1, 2 and 5 in that exact order, " +
-            "for example {0:NP;RU;рубль;рубля;рублей}";
     }
 }

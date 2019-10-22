@@ -21,7 +21,14 @@ namespace orlum.TypographyHelper
         /// <summary>
         /// Enumerates all distinguishing grammatical number values in the English language.
         /// </summary>
-        public IList<GrammaticalNumber> GrammaticalNumbers => new ImmutableArray<GrammaticalNumber> { GrammaticalNumber.Singular, GrammaticalNumber.Plural };
+        public IList<GrammaticalNumber> GrammaticalNumbers => ImmutableArray.Create<GrammaticalNumber>(
+            GrammaticalNumber.Singular, GrammaticalNumber.Plural);
+
+
+        /// <summary>
+        /// Describes how to get correct format string.
+        /// </summary>
+        public string DescriptionOfFormatString => "Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;EN;cow;cows}";
 
 
         /// <summary>
@@ -48,11 +55,5 @@ namespace orlum.TypographyHelper
                     return GrammaticalNumber.Plural;
             }
         }
-
-
-        /// <summary>
-        /// Describes how to get correct format string.
-        /// </summary>
-        public string DescriptionOfFormatString => "Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;EN;cow;cows}";
     }
 }

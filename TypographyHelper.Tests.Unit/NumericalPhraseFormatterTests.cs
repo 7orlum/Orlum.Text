@@ -87,16 +87,14 @@ namespace TypographyHelper.Tests.Unit
 
         [Theory]
         [InlineData(
-            "Expected 3 forms of a phrase inflected for number and splited by semicolon. " +
-            "Specify inflections of the phrase required to be compatible with numbers 1, 2 and 5 in that exact order, " +
-            "for example {0:NP;ru;рубль;рубля;рублей}",
+            "Expected 3 forms",
             UInt64.MaxValue, "Запрошена обработка {0:NP;ru;рубль;рубля:рублей}")]
         [InlineData("Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;en;cow;cows}", 1, "{0:NP;en;cat}")]
         [InlineData("Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;en;cow;cows}", 2, "{0:NP;en;cat;cats;dog}")]
         public void ThrowsExceptionOnBadFormatString(string expected, object number, string format)
         {
             var e = Assert.Throws<FormatException>(() => string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number));
-            Assert.Equal(expected, e.Message);
+            Assert.StartsWith(expected, e.Message, StringComparison.InvariantCultureIgnoreCase);
         }
 
 

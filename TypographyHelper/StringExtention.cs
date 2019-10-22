@@ -7,7 +7,7 @@ namespace orlum.TypographyHelper.StringExtention
     /// <summary>
     /// <see cref="String"/> auxiliary functions
     /// </summary>
-    public static class StringExtention
+    public static class StringExtensionMethods
     {
         /// <summary>
         /// Returns a copy of a string with first letter converted to uppercase.

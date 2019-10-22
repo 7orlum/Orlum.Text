@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using Xunit;
@@ -18,7 +19,7 @@ namespace TypographyHelper.Tests.Unit
         [InlineData(null, null)]
         public void StartWithLowerTest(string expected, string value)
         {
-            var result = StringHelper.UncapitalizeFirstLetter(value);
+            var result = StringHelper.UncapitalizeFirstLetter(value, CultureInfo.InvariantCulture);
 
             Assert.Equal(expected, result);
         }
@@ -33,7 +34,7 @@ namespace TypographyHelper.Tests.Unit
         [InlineData(null, null)]
         public void StartWithUpperTest(string expected, string value)
         {
-            var result = StringHelper.CapitalizeFirstLetter(value);
+            var result = StringHelper.CapitalizeFirstLetter(value, CultureInfo.InvariantCulture);
 
             Assert.Equal(expected, result);
         }
@@ -92,6 +93,9 @@ namespace TypographyHelper.Tests.Unit
         [MemberData(nameof(ParametersForJoinOptionalParametersTest))]
         public void JoinOptionalParametersTest(string expected, JoinParameters parameters)
         {
+            if (parameters == null)
+                throw new ArgumentNullException(nameof(parameters));
+
             var methodJoin = typeof(StringHelper).GetMethods().Single(m => m.Name == "Join" && m.GetParameters()[0].ParameterType == typeof(object[]));
             var result = methodJoin.Invoke(null, parameters.ToArray());
 
