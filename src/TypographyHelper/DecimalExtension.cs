@@ -8,23 +8,32 @@ namespace Orlum.TypographyHelper.DecimalExtention
 {
     public static class DecimalExtensionMethods
     {
+        private static Dictionary<string, CultureInfo> _currencyCultureInfoDictionary = null;
+
+
         /// <summary>
         /// Changes default currency symbol to a currency symbol for specified currency and formats number. Negative and positive patterns also will be changed.
         /// </summary>
         /// <param name="amount">Currency amount</param>
+        /// <param name="format">Standard numeric format string</param>
         /// <param name="isoCurrency">Three-character ISO 4217 currency symbol</param>
         /// <param name="cultureInfo">Prefered culture-specific information that will be used for formatting numeric values</param>
         /// <returns></returns>
-        public static string FormatCurrency(this decimal amount, string isoCurrency, CultureInfo cultureInfo = null)
+        public static string ToString(this decimal amount, string format, string isoCurrency, CultureInfo cultureInfo = null)
         {
             if (isoCurrency == null)
                 throw new ArgumentNullException(nameof(isoCurrency));
 
+            if (isoCurrency.Length != 3)
+                throw new ArgumentException("Value must be three-character ISO 4217 currency symbol", nameof(isoCurrency));
+
             if (cultureInfo == null)
                 cultureInfo = CultureInfo.CurrentCulture;
 
-            var customFormatter = CustomizeNumberFormatProvider(cultureInfo.NumberFormat, isoCurrency);
-            return string.Format(customFormatter, "{0:C}", amount);
+            if (string.IsNullOrEmpty(format))
+                format = "C";
+
+            return amount.ToString(format, CustomizeNumberFormatProvider(cultureInfo.NumberFormat, isoCurrency));
         }
 
 
@@ -46,8 +55,11 @@ namespace Orlum.TypographyHelper.DecimalExtention
 
             var result = (NumberFormatInfo)numberFormatInfo.Clone();
             result.CurrencySymbol = currencyNumberFormatInfo.CurrencySymbol;
-            result.CurrencyPositivePattern = currencyNumberFormatInfo.CurrencyPositivePattern;
-            result.CurrencyNegativePattern = currencyNumberFormatInfo.CurrencyNegativePattern;
+            //result.CurrencyPositivePattern = currencyNumberFormatInfo.CurrencyPositivePattern;
+            //result.CurrencyNegativePattern = currencyNumberFormatInfo.CurrencyNegativePattern;
+
+            Console.WriteLine(currencyNumberFormatInfo.CurrencySymbol);
+
             return result;
         }
 
@@ -69,7 +81,7 @@ namespace Orlum.TypographyHelper.DecimalExtention
                         .ToDictionary(group => group.Key, group => group
                             .Select(element => element.Culture)
                             .OrderByDescending(element => 
-                                (string.Compare(element.NumberFormat.CurrencySymbol, isoCurrency, ignoreCase: true) == 0 ? 0 : 1) + 
+                                (string.Compare(element.NumberFormat.CurrencySymbol, group.Key, ignoreCase: true) == 0 ? 0 : 1) + 
                                 (string.Compare(element.NumberFormat.CurrencySymbol, CultureInfo.InvariantCulture.NumberFormat.CurrencySymbol, ignoreCase: true) == 0 ? 0 : 1))
                             .First(), StringComparer.OrdinalIgnoreCase);
 
@@ -78,8 +90,5 @@ namespace Orlum.TypographyHelper.DecimalExtention
             else
                 return CultureInfo.InvariantCulture.NumberFormat;
         }
-
-
-        private static Dictionary<string, CultureInfo> _currencyCultureInfoDictionary = null;
     }
 }

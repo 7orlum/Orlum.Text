@@ -4,7 +4,6 @@ using System.Globalization;
 using Xunit;
 using Orlum.TypographyHelper;
 using static Orlum.TypographyHelper.Format;
-using NPFP = Orlum.TypographyHelper.NumericalPhraseFormatProvider;
 
 
 namespace TypographyHelper.Tests.Unit
@@ -43,27 +42,13 @@ namespace TypographyHelper.Tests.Unit
 
 
         [Fact]
-        public void ToStringWorks()
-        {
-            var np = new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture);
-            var number = 1;
-            var result = np.Format($"I have got {number} {number:NP;en;cat;cats}");
-
-            Assert.Equal("I have got 1 cat", result);
-        }
-
-
-        [Fact]
         public void StaticToStringWorks()
         {
             var number = 1;
-            var result = NumericalPhraseFormatProvider.Format($"I have got {number} {number:NP;en;cat;cats}", CultureInfo.InvariantCulture);
+            var result = Format.NP($"I have got {number} {number:NP;en;cat;cats}");
             Assert.Equal("I have got 1 cat", result);
 
-            result = NPFP.Format($"I have got {number} {number:NP;en;cat;cats}", CultureInfo.InvariantCulture);
-            Assert.Equal("I have got 1 cat", result);
-
-            result = Format.NP($"I have got {number} {number:NP;en;cat;cats}");
+            result = NP($"I have got {number} {number:NP;en;cat;cats}");
             Assert.Equal("I have got 1 cat", result);
         }
 
