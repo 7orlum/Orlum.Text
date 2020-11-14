@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Diagnostics.Contracts;
 
 
-namespace orlum.TypographyHelper
+namespace Orlum.TypographyHelper
 {
     /// <summary>
     /// Implementation of <see cref="INumberAgreement"/> for contemporary Russian.

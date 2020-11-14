@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using orlum.TypographyHelper;
+using Orlum.TypographyHelper;
 
 
 namespace TypographyHelper.Tests.Unit

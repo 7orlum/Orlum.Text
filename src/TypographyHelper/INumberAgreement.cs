@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace orlum.TypographyHelper
+namespace Orlum.TypographyHelper
 {
     /// <summary>
     /// Interface to supply <see cref="NumericalPhraseFormatter"/> language-specific number agreement information.

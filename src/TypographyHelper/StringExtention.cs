@@ -2,7 +2,7 @@
 using System.Globalization;
 
 
-namespace orlum.TypographyHelper.StringExtention
+namespace Orlum.TypographyHelper.StringExtention
 {
     /// <summary>
     /// <see cref="String"/> auxiliary functions

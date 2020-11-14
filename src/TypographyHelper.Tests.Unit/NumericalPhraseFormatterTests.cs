@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Xunit;
-using orlum.TypographyHelper;
+using Orlum.TypographyHelper;
+using static Orlum.TypographyHelper.Format;
+using NPFP = Orlum.TypographyHelper.NumericalPhraseFormatProvider;
 
 
 namespace TypographyHelper.Tests.Unit
 {
-    public class NumericalPhraseFormatterTests
+    public class NumericalPhraseFormatProviderTests
     {
         [Theory]
         [InlineData("Запрошено -4 рубля", -4, "{0:NP;ru;Запрошен;Запрошено;Запрошено} {0} {0:NP;ru;рубль;рубля;рублей}")]
@@ -34,9 +36,35 @@ namespace TypographyHelper.Tests.Unit
         [InlineData("cats", double.MinValue, "{0:NP;en;cat;cats}")]
         public void TakesDifferentTypesOfNumbers(string expected, object number, string format)
         {
-            var result = string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number);
+            var result = string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number);
 
             Assert.Equal(expected, result);
+        }
+
+
+        [Fact]
+        public void ToStringWorks()
+        {
+            var np = new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture);
+            var number = 1;
+            var result = np.Format($"I have got {number} {number:NP;en;cat;cats}");
+
+            Assert.Equal("I have got 1 cat", result);
+        }
+
+
+        [Fact]
+        public void StaticToStringWorks()
+        {
+            var number = 1;
+            var result = NumericalPhraseFormatProvider.Format($"I have got {number} {number:NP;en;cat;cats}", CultureInfo.InvariantCulture);
+            Assert.Equal("I have got 1 cat", result);
+
+            result = NPFP.Format($"I have got {number} {number:NP;en;cat;cats}", CultureInfo.InvariantCulture);
+            Assert.Equal("I have got 1 cat", result);
+
+            result = Format.NP($"I have got {number} {number:NP;en;cat;cats}");
+            Assert.Equal("I have got 1 cat", result);
         }
 
 
@@ -45,7 +73,7 @@ namespace TypographyHelper.Tests.Unit
         [InlineData("", null, "{0:N4}")]
         public void DosntHideStandardFormatSpecifiers(string expected, object number, string format)
         {
-            var result = string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number);
+            var result = string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number);
 
             Assert.Equal(expected, result);
         }
@@ -56,7 +84,7 @@ namespace TypographyHelper.Tests.Unit
         [InlineData("cats", 0, "{0:NP;en;cat;cats}")]
         public void FormatsNullValueTheSameWayAsZero(string expected, object number, string format)
         {
-            var result = string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number);
+            var result = string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number);
 
             Assert.Equal(expected, result);
         }
@@ -69,7 +97,7 @@ namespace TypographyHelper.Tests.Unit
         [InlineData("I have got 9 cats", 9, "I have got {0} {0:np;EN;cat;cats}")]
         public void InsensitiveToCaseOfFormatAndLanguageSpecifiers(string expected, object number, string format)
         {
-            var result = string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number);
+            var result = string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number);
 
             Assert.Equal(expected, result);
         }
@@ -80,7 +108,7 @@ namespace TypographyHelper.Tests.Unit
         [InlineData("Argument must be convertable to double", new int[] { 1, 2 }, "{0:NP;ru;рубль;рубля;рублей}")]
         public void ThrowsExceptionOnBadNumberValue(string expected, object number, string format)
         {
-            var e = Assert.Throws<ArgumentException>(() => string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number));
+            var e = Assert.Throws<ArgumentException>(() => string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number));
             Assert.Equal(expected, e.Message);
         }
 
@@ -91,20 +119,22 @@ namespace TypographyHelper.Tests.Unit
             UInt64.MaxValue, "Запрошена обработка {0:NP;ru;рубль;рубля:рублей}")]
         [InlineData("Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;en;cow;cows}", 1, "{0:NP;en;cat}")]
         [InlineData("Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;en;cow;cows}", 2, "{0:NP;en;cat;cats;dog}")]
+        [InlineData("Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;en;cow;cows}", 1, "{0:NP;en;}")]
+        [InlineData("Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;en;cow;cows}", 1, "{0:NP;en}")]
+        [InlineData("Expected format string like {0:NP;EN;cow;cows}", 1, "{0:NP}")]
+        [InlineData("Expected format string like {0:NP;EN;cow;cows}", 3, "{0:NP;;cat;cats}")]
         public void ThrowsExceptionOnBadFormatString(string expected, object number, string format)
         {
-            var e = Assert.Throws<FormatException>(() => string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number));
+            var e = Assert.Throws<FormatException>(() => string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number));
             Assert.StartsWith(expected, e.Message, StringComparison.InvariantCultureIgnoreCase);
         }
 
 
         [Theory]
-        [InlineData("The given key '' was not present in the dictionary.", 3, "{0:NP;;cat;cats}")]
-        [InlineData("The given key '' was not present in the dictionary.", 4, "{0:NP;;cat;cats;}")]
         [InlineData("The given key '-' was not present in the dictionary.", 5, "{0:NP;-;cat;cats;}")]
-        public void ThrowsExceptionOnBadLanguageSpecifier(string expected, object number, string format)
+        public void ThrowsExceptionOnUnknownLanguageSpecifier(string expected, object number, string format)
         {
-            var e = Assert.Throws<KeyNotFoundException>(() => string.Format(new NumericalPhraseFormatter(CultureInfo.InvariantCulture), format, number));
+            var e = Assert.Throws<KeyNotFoundException>(() => string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number));
             Assert.Equal(expected, e.Message);
         }
 
@@ -112,15 +142,14 @@ namespace TypographyHelper.Tests.Unit
         [Fact]
         public void AllowsCustomSetOfNumberAgreements()
         {
-            var numberAgreements = new Dictionary<string, INumberAgreement>();
-            numberAgreements.Add("ru", new RussianNumberAgreement());
-            numberAgreements.Add("EN", new EnglishNumberAgreement());
-
-            var formatter = new NumericalPhraseFormatter(numberAgreements, CultureInfo.InvariantCulture);
+            var formatter = new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture);
+            formatter.NumberAgreements.Remove("pl");
+            formatter.NumberAgreements.Add("ru-ru", new RussianNumberAgreement());
 
             Assert.Equal("I have got 1 cat", string.Format(formatter, "I have got {0} {0:NP;en;cat;cats}", 1));
             Assert.Equal("Запрошено 6 рублей", string.Format(formatter, "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;ru;рубль;рубля;рублей}", 6));
             Assert.Throws<KeyNotFoundException>(() => string.Format(formatter, "Zażądano {0} {0:NP;PL;rubel;ruble;rubli;rubla}", 1));
+            Assert.Equal("Запрошено 6 рублей", string.Format(formatter, "{0:NP;ru-ru;Запрошен;Запрошено;Запрошено} {0} {0:NP;ru;рубль;рубля;рублей}", 6));
         }
     }
 }

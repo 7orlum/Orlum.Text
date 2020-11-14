@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 
 
-namespace orlum.TypographyHelper
+namespace Orlum.TypographyHelper
 {
     /// <summary>
     /// Auxiliary functions for formatting strings

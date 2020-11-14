@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using Xunit;
-using orlum.TypographyHelper;
+using Orlum.TypographyHelper;
 
 
 namespace TypographyHelper.Tests.Unit

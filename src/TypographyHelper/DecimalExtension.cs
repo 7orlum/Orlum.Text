@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 
 
-namespace orlum.TypographyHelper.DecimalExtention
+namespace Orlum.TypographyHelper.DecimalExtention
 {
     public static class DecimalExtensionMethods
     {
@@ -66,7 +66,12 @@ namespace orlum.TypographyHelper.DecimalExtention
                 _currencyCultureInfoDictionary = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
                         .Select(culture => (Culture: culture, Currency: new RegionInfo(culture.LCID).ISOCurrencySymbol))
                         .GroupBy(cultureCurrencyPair => cultureCurrencyPair.Currency)
-                        .ToDictionary(group => group.Key, group => group.First().Culture, StringComparer.OrdinalIgnoreCase);
+                        .ToDictionary(group => group.Key, group => group
+                            .Select(element => element.Culture)
+                            .OrderByDescending(element => 
+                                (string.Compare(element.NumberFormat.CurrencySymbol, isoCurrency, ignoreCase: true) == 0 ? 0 : 1) + 
+                                (string.Compare(element.NumberFormat.CurrencySymbol, CultureInfo.InvariantCulture.NumberFormat.CurrencySymbol, ignoreCase: true) == 0 ? 0 : 1))
+                            .First(), StringComparer.OrdinalIgnoreCase);
 
             if (_currencyCultureInfoDictionary.ContainsKey(isoCurrency))
                 return _currencyCultureInfoDictionary[isoCurrency].NumberFormat;

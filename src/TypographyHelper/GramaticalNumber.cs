@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
 
-namespace orlum.TypographyHelper
+namespace Orlum.TypographyHelper
 {
     /// <summary>
     /// In linguistics, grammatical number is a grammatical category of nouns, pronouns, and adjective and verb agreement that expresses count distinctions (such as "one", "two", or "three or more").
