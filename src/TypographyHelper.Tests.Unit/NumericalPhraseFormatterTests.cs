@@ -41,22 +41,10 @@ namespace TypographyHelper.Tests.Unit
         }
 
 
-        [Fact]
-        public void StaticToStringWorks()
-        {
-            var number = 1;
-            var result = Format.NP($"I have got {number} {number:NP;en;cat;cats}");
-            Assert.Equal("I have got 1 cat", result);
-
-            result = NP($"I have got {number} {number:NP;en;cat;cats}");
-            Assert.Equal("I have got 1 cat", result);
-        }
-
-
         [Theory]
         [InlineData("23.0000", 23, "{0:N4}")]
         [InlineData("", null, "{0:N4}")]
-        public void DosntHideStandardFormatSpecifiers(string expected, object number, string format)
+        public void DoesNotHideStandardFormatSpecifiers(string expected, object number, string format)
         {
             var result = string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number);
 
@@ -80,7 +68,7 @@ namespace TypographyHelper.Tests.Unit
         [InlineData("I have got 7 cats", 7, "I have got {0} {0:np;en;cat;cats}")]
         [InlineData("I have got 8 cats", 8, "I have got {0} {0:NP;en;cat;cats}")]
         [InlineData("I have got 9 cats", 9, "I have got {0} {0:np;EN;cat;cats}")]
-        public void InsensitiveToCaseOfFormatAndLanguageSpecifiers(string expected, object number, string format)
+        public void IsInsensitiveToCaseOfFormatAndLanguageSpecifiers(string expected, object number, string format)
         {
             var result = string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number);
 
