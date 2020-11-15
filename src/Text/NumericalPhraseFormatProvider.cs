@@ -6,14 +6,14 @@ using System.Text.RegularExpressions;
 using System.Diagnostics.Contracts;
 
 
-namespace Orlum.TypographyHelper
+namespace Orlum.Text
 {
     /// <summary>
     /// The custom string formatter that choose the correct, in accordance with language agreement, form of the phrase depending on the given numeric argument
     /// </summary>
     /// <example>The following example shows how to use <see cref="NumericalPhraseFormatProvider"/> to format string.
     /// <code>
-    /// using orlum.TypographyHelper;
+    /// using orlum.Text;
     ///
     /// public class FormatterExample
     /// {

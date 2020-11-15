@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <AssemblyName>Orlum.Text.Tests.Unit</AssemblyName>
+    <RootNamespace>Orlum.Text.Tests.Unit</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TypographyHelper\TypographyHelper.csproj" />
+    <ProjectReference Include="..\Text\Text.csproj" />
   </ItemGroup>
 
 </Project>

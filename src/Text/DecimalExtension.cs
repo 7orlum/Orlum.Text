@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 
 
-namespace Orlum.TypographyHelper.DecimalExtention
+namespace Orlum.Text.DecimalExtention
 {
     public static class DecimalExtensionMethods
     {

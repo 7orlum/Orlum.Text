@@ -1,8 +1,7 @@
 ﻿using Xunit;
-using Orlum.TypographyHelper;
 
 
-namespace TypographyHelper.Tests.Unit
+namespace Orlum.Text.Tests.Unit
 {
     public class EnglishNumberAgreementTests
     {

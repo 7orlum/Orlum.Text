@@ -1,12 +1,11 @@
+using Xunit;
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
-using Xunit;
-using Orlum.TypographyHelper;
 
 
-namespace TypographyHelper.Tests.Unit
+namespace Orlum.Text.Tests.Unit
 {
     public class StringHelperTests
     {

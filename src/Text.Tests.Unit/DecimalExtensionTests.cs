@@ -1,10 +1,10 @@
-﻿using Orlum.TypographyHelper.DecimalExtention;
+﻿using Xunit;
 using System;
 using System.Globalization;
-using Xunit;
+using Orlum.Text.DecimalExtention;
 
 
-namespace TypographyHelper.Tests.Unit
+namespace Orlum.Text.Tests.Unit
 {
     public class DecimalExtensionTests
     {

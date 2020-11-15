@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 
 
-namespace Orlum.TypographyHelper
+namespace Orlum.Text
 {
     /// <summary>
     /// Auxiliary functions for formatting strings
@@ -29,7 +29,7 @@ namespace Orlum.TypographyHelper
         /// <see cref="String.Empty"/> if count is zero, value has no elements, or separator and all the elements of value are Empty.</returns>
         /// <example>The following example shows how to use <see langword="Join"/> to format string.
         /// <code>
-        /// using orlum.TypographyHelper;
+        /// using Orlum.Text;
         ///
         /// public class FormatterExample
         /// {

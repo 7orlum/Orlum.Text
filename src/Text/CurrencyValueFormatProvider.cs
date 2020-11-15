@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics.Contracts;
 
 
-namespace Orlum.TypographyHelper
+namespace Orlum.Text
 {
     public class CurrencyValueFormatProvider : IFormatProvider
     {

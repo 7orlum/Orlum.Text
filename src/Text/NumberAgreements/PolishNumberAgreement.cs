@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Diagnostics.Contracts;
 
 
-namespace Orlum.TypographyHelper
+namespace Orlum.Text
 {
     /// <summary>
     /// Implementation of <see cref="INumberAgreement"/> for contemporary Polish.

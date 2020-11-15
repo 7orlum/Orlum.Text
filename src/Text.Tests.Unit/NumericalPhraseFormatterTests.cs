@@ -1,12 +1,10 @@
-﻿using System;
+﻿using Xunit;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Xunit;
-using Orlum.TypographyHelper;
-using static Orlum.TypographyHelper.Format;
 
 
-namespace TypographyHelper.Tests.Unit
+namespace Orlum.Text.Tests.Unit
 {
     public class NumericalPhraseFormatProviderTests
     {

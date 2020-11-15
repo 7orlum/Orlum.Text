@@ -1,10 +1,9 @@
 ﻿using Xunit;
 using System.Globalization;
-using Orlum.TypographyHelper;
-using static Orlum.TypographyHelper.Format;
+using static Orlum.Text.Format;
 
 
-namespace TypographyHelper.Tests.Unit
+namespace Orlum.Text.Tests.Unit
 {
     public class FormatTests
     {

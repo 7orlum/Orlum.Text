@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 
 
-namespace Orlum.TypographyHelper
+namespace Orlum.Text
 {
     public class Format
     {

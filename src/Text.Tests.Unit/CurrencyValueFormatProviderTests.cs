@@ -1,10 +1,9 @@
-﻿using Orlum.TypographyHelper;
+﻿using Xunit;
 using System;
 using System.Globalization;
-using Xunit;
 
 
-namespace TypographyHelper.Tests.Unit
+namespace Orlum.Text.Tests.Unit
 {
     public class CurrencyValueFormatProviderTests
     {
