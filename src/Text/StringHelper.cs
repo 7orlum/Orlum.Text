@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Text;
 using System.Globalization;
 using System.Linq;
@@ -164,10 +165,12 @@ namespace Orlum.Text
             if (string.IsNullOrEmpty(value))
                 return value;
 
-            if (value.Length == 1)
-                return value.ToUpper(culture);
+            var result = Rune.DecodeFromUtf16(value, out var rune, out var charsConsumed);
+
+            if (result != OperationStatus.Done || Rune.IsUpper(rune))
+                return value;
             else
-                return value.Remove(1).ToUpper(culture) + value.Remove(0, 1);
+                return Rune.ToUpper(rune, culture) + value[charsConsumed..];
         }
 
         
@@ -206,10 +209,12 @@ namespace Orlum.Text
             if (string.IsNullOrEmpty(value))
                 return value;
 
-            if (value.Length == 1)
-                return value.ToLower(culture);
+            var result = Rune.DecodeFromUtf16(value, out var rune, out var charsConsumed);
+
+            if (result != OperationStatus.Done || Rune.IsLower(rune))
+                return value;
             else
-                return value.Remove(1).ToLower(culture) + value.Remove(0, 1);
+                return Rune.ToLower(rune, culture) + value[charsConsumed..];
         }
     }
 }

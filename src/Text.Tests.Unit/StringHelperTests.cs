@@ -1,4 +1,4 @@
-using Xunit;
+п»їusing Xunit;
 using System;
 using System.Globalization;
 using System.Linq;
@@ -16,6 +16,9 @@ namespace Orlum.Text.Tests.Unit
         [InlineData("l", "L")]
         [InlineData("", "")]
         [InlineData(null, null)]
+        [InlineData("рђ“ё", "рђ“ђ")]
+        [InlineData("рђ“·рђ“рђ“»рђ“рђ“»рђ“џ рђ’»рђ“џ", "рђ“Џрђ“рђ“»рђ“рђ“»рђ“џ рђ’»рђ“џ")]
+        [InlineData("рђђїрђђ±рђђ»", "рђђ—рђђ±рђђ»")]
         public void StartWithLowerTest(string expected, string value)
         {
             var result = StringHelper.UncapitalizeFirstLetter(value, CultureInfo.InvariantCulture);
@@ -31,6 +34,9 @@ namespace Orlum.Text.Tests.Unit
         [InlineData("L", "l")]
         [InlineData("", "")]
         [InlineData(null, null)]
+        [InlineData("рђ“ђ", "рђ“ё")]
+        [InlineData("рђ“Џрђ“рђ“»рђ“рђ“»рђ“џ рђ’»рђ“џ", "рђ“·рђ“рђ“»рђ“рђ“»рђ“џ рђ’»рђ“џ")]
+        [InlineData("рђђ—рђђ±рђђ»", "рђђїрђђ±рђђ»")]
         public void StartWithUpperTest(string expected, string value)
         {
             var result = StringHelper.CapitalizeFirstLetter(value, CultureInfo.InvariantCulture);
@@ -41,44 +47,44 @@ namespace Orlum.Text.Tests.Unit
 
         [Theory]
         [InlineData("1, 2, , 3, , 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, false, null)]
-        [InlineData("1, 2, , 3, , 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, false, null)]
+        [InlineData("1, 2, , 3, , 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " РёР»Рё ", null, false, null)]
         [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, true, null)]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, true, null)]
+        [InlineData("1, 2, 3, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " РёР»Рё ", null, true, null)]
 
-        [InlineData("1, 2, Н, 3, Н, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, false, "Н")]
-        [InlineData("1, 2, Н, 3, Н, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, false, "Н")]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, true, "Н")]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, true, "Н")]
+        [InlineData("1, 2, Рќ, 3, Рќ, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, false, "Рќ")]
+        [InlineData("1, 2, Рќ, 3, Рќ, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " РёР»Рё ", null, false, "Рќ")]
+        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, true, "Рќ")]
+        [InlineData("1, 2, 3, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " РёР»Рё ", null, true, "Рќ")]
 
         [InlineData("1, 2,, 3,, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", false, null)]
-        [InlineData("1, 2,, 3,, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", false, null)]
+        [InlineData("1, 2,, 3,, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " РёР»Рё ", ",", false, null)]
         [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", true, null)]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", true, null)]
+        [InlineData("1, 2, 3, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " РёР»Рё ", ",", true, null)]
 
-        [InlineData("1, 2,Н, 3,Н, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", false, "Н")]
-        [InlineData("1, 2,Н, 3,Н, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", false, "Н")]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", true, "Н")]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", true, "Н")]
+        [InlineData("1, 2,Рќ, 3,Рќ, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", false, "Рќ")]
+        [InlineData("1, 2,Рќ, 3,Рќ, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " РёР»Рё ", ",", false, "Рќ")]
+        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", true, "Рќ")]
+        [InlineData("1, 2, 3, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " РёР»Рё ", ",", true, "Рќ")]
 
         [InlineData("1, 2, , 3, , 4, 5, ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, false, null)]
-        [InlineData("1, 2, , 3, , 4, 5 или ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, false, null)]
+        [InlineData("1, 2, , 3, , 4, 5 РёР»Рё ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " РёР»Рё ", null, false, null)]
         [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, true, null)]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, true, null)]
+        [InlineData("1, 2, 3, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " РёР»Рё ", null, true, null)]
 
-        [InlineData("1, 2, Н, 3, Н, 4, 5, Н", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, false, "Н")]
-        [InlineData("1, 2, Н, 3, Н, 4, 5 или Н", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, false, "Н")]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, true, "Н")]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, true, "Н")]
+        [InlineData("1, 2, Рќ, 3, Рќ, 4, 5, Рќ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, false, "Рќ")]
+        [InlineData("1, 2, Рќ, 3, Рќ, 4, 5 РёР»Рё Рќ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " РёР»Рё ", null, false, "Рќ")]
+        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, true, "Рќ")]
+        [InlineData("1, 2, 3, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " РёР»Рё ", null, true, "Рќ")]
 
         [InlineData("1, 2,, 3,, 4, 5,", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", false, null)]
-        [InlineData("1, 2,, 3,, 4, 5 или ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", false, null)]
+        [InlineData("1, 2,, 3,, 4, 5 РёР»Рё ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " РёР»Рё ", ",", false, null)]
         [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", true, null)]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", true, null)]
+        [InlineData("1, 2, 3, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " РёР»Рё ", ",", true, null)]
 
-        [InlineData("1, 2,Н, 3,Н, 4, 5,Н", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", false, "Н")]
-        [InlineData("1, 2,Н, 3,Н, 4, 5 или Н", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", false, "Н")]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", true, "Н")]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", true, "Н")]
+        [InlineData("1, 2,Рќ, 3,Рќ, 4, 5,Рќ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", false, "Рќ")]
+        [InlineData("1, 2,Рќ, 3,Рќ, 4, 5 РёР»Рё Рќ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " РёР»Рё ", ",", false, "Рќ")]
+        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", true, "Рќ")]
+        [InlineData("1, 2, 3, 4 РёР»Рё 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " РёР»Рё ", ",", true, "Рќ")]
         public void JoinTest(string expected, object[] value, string separator, string lastSeparator, string separatorBeforeNullAndEmptyValue,
             bool skipNullAndEmptyValues, string replaceNullAndEmptyValuesWith)
         {
@@ -109,46 +115,46 @@ namespace Orlum.Text.Tests.Unit
             var value1 = new object[] { 1, 2, null, 3, null, 4, 5 };
 
             result.Add(new object[] { "1, 2, , 3, , 4, 5", new JoinParameters(value1, ", ") });
-            result.Add(new object[] { "1, 2, , 3, , 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или " } });
+            result.Add(new object[] { "1, 2, , 3, , 4 РёР»Рё 5", new JoinParameters(value1, ", ") { lastSeparator = " РёР»Рё " } });
             result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value1, ", ") { skipNullAndEmptyValues = true } });
-            result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или ", skipNullAndEmptyValues = true } });
+            result.Add(new object[] { "1, 2, 3, 4 РёР»Рё 5", new JoinParameters(value1, ", ") { lastSeparator = " РёР»Рё ", skipNullAndEmptyValues = true } });
 
-            result.Add(new object[] { "1, 2, Н, 3, Н, 4, 5", new JoinParameters(value1, ", ") { replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, Н, 3, Н, 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или ", replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value1, ", ") { skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или ", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
+            result.Add(new object[] { "1, 2, Рќ, 3, Рќ, 4, 5", new JoinParameters(value1, ", ") { replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, Рќ, 3, Рќ, 4 РёР»Рё 5", new JoinParameters(value1, ", ") { lastSeparator = " РёР»Рё ", replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value1, ", ") { skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, 3, 4 РёР»Рё 5", new JoinParameters(value1, ", ") { lastSeparator = " РёР»Рё ", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Рќ" } });
 
             result.Add(new object[] { "1, 2,, 3,, 4, 5", new JoinParameters(value1, ", ") { separatorBeforeNullAndEmptyValue = "," } });
-            result.Add(new object[] { "1, 2,, 3,, 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = "," } });
+            result.Add(new object[] { "1, 2,, 3,, 4 РёР»Рё 5", new JoinParameters(value1, ", ") { lastSeparator = " РёР»Рё ", separatorBeforeNullAndEmptyValue = "," } });
             result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value1, ", ") { separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true } });
-            result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true } });
+            result.Add(new object[] { "1, 2, 3, 4 РёР»Рё 5", new JoinParameters(value1, ", ") { lastSeparator = " РёР»Рё ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true } });
 
-            result.Add(new object[] { "1, 2,Н, 3,Н, 4, 5", new JoinParameters(value1, ", ") { separatorBeforeNullAndEmptyValue = ",", replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2,Н, 3,Н, 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = ",", replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value1, ", ") { separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
+            result.Add(new object[] { "1, 2,Рќ, 3,Рќ, 4, 5", new JoinParameters(value1, ", ") { separatorBeforeNullAndEmptyValue = ",", replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2,Рќ, 3,Рќ, 4 РёР»Рё 5", new JoinParameters(value1, ", ") { lastSeparator = " РёР»Рё ", separatorBeforeNullAndEmptyValue = ",", replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value1, ", ") { separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, 3, 4 РёР»Рё 5", new JoinParameters(value1, ", ") { lastSeparator = " РёР»Рё ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Рќ" } });
 
             var value2 = new object[] { 1, 2, null, 3, null, 4, 5, null };
 
             result.Add(new object[] { "1, 2, , 3, , 4, 5, ", new JoinParameters(value2, ", ") });
-            result.Add(new object[] { "1, 2, , 3, , 4, 5 или ", new JoinParameters(value2, ", ") { lastSeparator = " или " } });
+            result.Add(new object[] { "1, 2, , 3, , 4, 5 РёР»Рё ", new JoinParameters(value2, ", ") { lastSeparator = " РёР»Рё " } });
             result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value2, ", ") { skipNullAndEmptyValues = true } });
-            result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value2, ", ") { lastSeparator = " или ", skipNullAndEmptyValues = true } });
+            result.Add(new object[] { "1, 2, 3, 4 РёР»Рё 5", new JoinParameters(value2, ", ") { lastSeparator = " РёР»Рё ", skipNullAndEmptyValues = true } });
 
-            result.Add(new object[] { "1, 2, Н, 3, Н, 4, 5, Н", new JoinParameters(value2, ", ") { replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, Н, 3, Н, 4, 5 или Н", new JoinParameters(value2, ", ") { lastSeparator = " или ", replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value2, ", ") { skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value2, ", ") { lastSeparator = " или ", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
+            result.Add(new object[] { "1, 2, Рќ, 3, Рќ, 4, 5, Рќ", new JoinParameters(value2, ", ") { replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, Рќ, 3, Рќ, 4, 5 РёР»Рё Рќ", new JoinParameters(value2, ", ") { lastSeparator = " РёР»Рё ", replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value2, ", ") { skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, 3, 4 РёР»Рё 5", new JoinParameters(value2, ", ") { lastSeparator = " РёР»Рё ", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Рќ" } });
 
             result.Add(new object[] { "1, 2,, 3,, 4, 5,", new JoinParameters(value2, ", ") { separatorBeforeNullAndEmptyValue = "," } });
-            result.Add(new object[] { "1, 2,, 3,, 4, 5 или ", new JoinParameters(value2, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = "," } });
+            result.Add(new object[] { "1, 2,, 3,, 4, 5 РёР»Рё ", new JoinParameters(value2, ", ") { lastSeparator = " РёР»Рё ", separatorBeforeNullAndEmptyValue = "," } });
             result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value2, ", ") { separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true } });
-            result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value2, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true } });
+            result.Add(new object[] { "1, 2, 3, 4 РёР»Рё 5", new JoinParameters(value2, ", ") { lastSeparator = " РёР»Рё ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true } });
 
-            result.Add(new object[] { "1, 2,Н, 3,Н, 4, 5,Н", new JoinParameters(value2, ", ") { separatorBeforeNullAndEmptyValue = ",", replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2,Н, 3,Н, 4, 5 или Н", new JoinParameters(value2, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = ",", replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value2, ", ") { separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
-            result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value2, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
+            result.Add(new object[] { "1, 2,Рќ, 3,Рќ, 4, 5,Рќ", new JoinParameters(value2, ", ") { separatorBeforeNullAndEmptyValue = ",", replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2,Рќ, 3,Рќ, 4, 5 РёР»Рё Рќ", new JoinParameters(value2, ", ") { lastSeparator = " РёР»Рё ", separatorBeforeNullAndEmptyValue = ",", replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value2, ", ") { separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Рќ" } });
+            result.Add(new object[] { "1, 2, 3, 4 РёР»Рё 5", new JoinParameters(value2, ", ") { lastSeparator = " РёР»Рё ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Рќ" } });
 
             return result;
         }
