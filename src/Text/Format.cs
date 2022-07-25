@@ -14,7 +14,7 @@ namespace Orlum.Text
             return NP(null, formattableString);
         }
 
-        public static string NP(CultureInfo cultureInfo, FormattableString formattableString)
+        public static string NP(CultureInfo? cultureInfo, FormattableString formattableString)
         {
             if (formattableString == null)
                 throw new ArgumentNullException(nameof(formattableString));
@@ -30,7 +30,7 @@ namespace Orlum.Text
             return NumericalPhrase(null, format, args);
         }
 
-        public static string NumericalPhrase(CultureInfo cultureInfo, string format, params object[] args)
+        public static string NumericalPhrase(CultureInfo? cultureInfo, string format, params object[] args)
         {
             if (format == null)
                 throw new ArgumentNullException(nameof(format));
@@ -46,7 +46,7 @@ namespace Orlum.Text
             return CV(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, formattableString);
         }
 
-        public static string CV(CultureInfo cultureInfo, string isoCurrencySymbol, FormattableString formattableString)
+        public static string CV(CultureInfo? cultureInfo, string isoCurrencySymbol, FormattableString formattableString)
         {
             return CV(cultureInfo, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, formattableString);
         }
@@ -56,7 +56,7 @@ namespace Orlum.Text
             return CV(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns, formattableString);
         }
 
-        public static string CV(CultureInfo cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, FormattableString formattableString)
+        public static string CV(CultureInfo? cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, FormattableString formattableString)
         {
             if (formattableString == null)
                 throw new ArgumentNullException(nameof(formattableString));
@@ -82,12 +82,12 @@ namespace Orlum.Text
             return CurrencyValue(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns, format, args);
         }
 
-        public static string CurrencyValue(CultureInfo cultureInfo, string isoCurrencySymbol, string format, params object[] args)
+        public static string CurrencyValue(CultureInfo? cultureInfo, string isoCurrencySymbol, string format, params object[] args)
         {
             return CurrencyValue(cultureInfo, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, format, args);
         }
 
-        public static string CurrencyValue(CultureInfo cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, string format, params object[] args)
+        public static string CurrencyValue(CultureInfo? cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, string format, params object[] args)
         {
             if (format == null)
                 throw new ArgumentNullException(nameof(format));
@@ -104,7 +104,7 @@ namespace Orlum.Text
         }
         
         [Obsolete("This function signature is obsolete. Use public static string NP(CultureInfo cultureInfo, String format, params object[] args)")]
-        public static string NP(FormattableString formattableString, CultureInfo cultureInfo = null)
+        public static string NP(FormattableString formattableString, CultureInfo? cultureInfo = null)
         {
             if (formattableString == null)
                 throw new ArgumentNullException(nameof(formattableString));
@@ -116,13 +116,13 @@ namespace Orlum.Text
         }
 
         [Obsolete("This function signature is obsolete. Use public static string CV(CultureInfo cultureInfo, string isoCurrencySymbol, FormattableString formattableString)")]
-        public static string CV(FormattableString formattableString, string isoCurrencySymbol, CultureInfo cultureInfo = null)
+        public static string CV(FormattableString formattableString, string isoCurrencySymbol, CultureInfo? cultureInfo = null)
         {
             return CV(formattableString, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, cultureInfo);
         }
 
         [Obsolete("This function signature is obsolete. Use public static string CV(CultureInfo cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, FormattableString formattableString)")]
-        public static string CV(FormattableString formattableString, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, CultureInfo cultureInfo = null)
+        public static string CV(FormattableString formattableString, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, CultureInfo? cultureInfo = null)
         {
             if (formattableString == null)
                 throw new ArgumentNullException(nameof(formattableString));
@@ -138,6 +138,6 @@ namespace Orlum.Text
             return formattableString.ToString(_currencyValueFormatProviders[key]);
         }
 
-        private record CurrencyValueFormatProviderKey(string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, CultureInfo cultureInfo);
+        private record CurrencyValueFormatProviderKey(string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, CultureInfo? cultureInfo);
     }
 }

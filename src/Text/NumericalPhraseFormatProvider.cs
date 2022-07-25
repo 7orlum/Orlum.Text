@@ -1,9 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Diagnostics.Contracts;
 
 
 namespace Orlum.Text
@@ -49,14 +45,14 @@ namespace Orlum.Text
         /// <summary>
         /// A culture-specific information using for dates and numbers formatting.
         /// </summary>
-        public CultureInfo CultureInfo { get; set; }
+        public CultureInfo? CultureInfo { get; set; }
 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NumericalPhraseFormatProvider"/> class based on the specified culture information.
         /// </summary>
         /// <param name="cultureInfo">Culture-specific information using for dates and numbers formatting.</param>
-        public NumericalPhraseFormatProvider(CultureInfo cultureInfo = null)
+        public NumericalPhraseFormatProvider(CultureInfo? cultureInfo = null)
         {
             CultureInfo = cultureInfo;
             NumberAgreements.Add("en", new EnglishNumberAgreement());
@@ -70,10 +66,8 @@ namespace Orlum.Text
         /// </summary>
         /// <param name="formatType">An object that specifies the type of format object to return.</param>
         /// <returns></returns>
-        public object GetFormat(Type formatType)
+        public object? GetFormat(Type? formatType)
         {
-            Contract.Ensures(Contract.Result<object>() == null || Contract.Result<object>() is NumericalPhraseFormatProvider);
-
             if (typeof(ICustomFormatter).IsAssignableFrom(formatType))
                 return _formatter;
             else
@@ -93,13 +87,11 @@ namespace Orlum.Text
             /// <exception cref="ArgumentException">The value of <paramref name="arg"/> is not convertable to double.</exception>
             /// <exception cref="FormatException">Format string is incorrect.</exception>
             /// <exception cref="KeyNotFoundException">Number agreement for specifiied language is not found.</exception>
-            public string Format(string format, object arg, IFormatProvider formatProvider)
+            public string Format(string? format, object? arg, IFormatProvider? formatProvider)
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-
                 var numericalPhraseFormatProvider = formatProvider as NumericalPhraseFormatProvider;
                 if (numericalPhraseFormatProvider == null)
-                    return null;
+                    return String.Empty;
 
                 if (!TryParseFormat(format, out var language, out var forms))
                     return HandleOtherFormats(format, arg, numericalPhraseFormatProvider.CultureInfo);
@@ -125,10 +117,10 @@ namespace Orlum.Text
             }
 
             
-            private bool TryParseFormat(string format, out string language, out string[] forms)
+            private bool TryParseFormat(string? format, out string language, out string[] forms)
             {
-                language = null;
-                forms = null;
+                language = string.Empty;
+                forms = new string[] { };
                 
                 if (string.IsNullOrEmpty(format))
                     return false;
@@ -144,16 +136,14 @@ namespace Orlum.Text
             }
 
             
-            private string HandleOtherFormats(string format, object arg, CultureInfo culture)
+            private string HandleOtherFormats(string? format, object? arg, CultureInfo? culture)
             {
-                Contract.Ensures(Contract.Result<string>() != null);
-
                 if (arg is IFormattable)
                     return ((IFormattable)arg).ToString(format, culture);
                 else if (arg == null)
-                    return String.Empty;
+                    return string.Empty;
                 else
-                    return arg.ToString();
+                    return arg.ToString() ?? string.Empty;
             }
         }
     }

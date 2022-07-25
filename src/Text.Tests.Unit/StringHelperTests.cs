@@ -46,46 +46,46 @@ namespace Orlum.Text.Tests.Unit
 
 
         [Theory]
-        [InlineData("1, 2, , 3, , 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, false, null)]
-        [InlineData("1, 2, , 3, , 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, false, null)]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, true, null)]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, true, null)]
+        [InlineData("1, 2, , 3, , 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, false, null)]
+        [InlineData("1, 2, , 3, , 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, false, null)]
+        [InlineData("1, 2, 3, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, true, null)]
+        [InlineData("1, 2, 3, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, true, null)]
 
-        [InlineData("1, 2, Н, 3, Н, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, false, "Н")]
-        [InlineData("1, 2, Н, 3, Н, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, false, "Н")]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, true, "Н")]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, true, "Н")]
+        [InlineData("1, 2, Н, 3, Н, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, false, "Н")]
+        [InlineData("1, 2, Н, 3, Н, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, false, "Н")]
+        [InlineData("1, 2, 3, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, true, "Н")]
+        [InlineData("1, 2, 3, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", null, true, "Н")]
 
-        [InlineData("1, 2,, 3,, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", false, null)]
-        [InlineData("1, 2,, 3,, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", false, null)]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", true, null)]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", true, null)]
+        [InlineData("1, 2,, 3,, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", false, null)]
+        [InlineData("1, 2,, 3,, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", false, null)]
+        [InlineData("1, 2, 3, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", true, null)]
+        [InlineData("1, 2, 3, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", true, null)]
 
-        [InlineData("1, 2,Н, 3,Н, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", false, "Н")]
-        [InlineData("1, 2,Н, 3,Н, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", false, "Н")]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", true, "Н")]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", true, "Н")]
+        [InlineData("1, 2,Н, 3,Н, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", false, "Н")]
+        [InlineData("1, 2,Н, 3,Н, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", false, "Н")]
+        [InlineData("1, 2, 3, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, ",", true, "Н")]
+        [InlineData("1, 2, 3, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", " или ", ",", true, "Н")]
 
-        [InlineData("1, 2, , 3, , 4, 5, ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, false, null)]
-        [InlineData("1, 2, , 3, , 4, 5 или ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, false, null)]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, true, null)]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, true, null)]
+        [InlineData("1, 2, , 3, , 4, 5, ", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, false, null)]
+        [InlineData("1, 2, , 3, , 4, 5 или ", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, false, null)]
+        [InlineData("1, 2, 3, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, true, null)]
+        [InlineData("1, 2, 3, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, true, null)]
 
-        [InlineData("1, 2, Н, 3, Н, 4, 5, Н", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, false, "Н")]
-        [InlineData("1, 2, Н, 3, Н, 4, 5 или Н", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, false, "Н")]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, true, "Н")]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, true, "Н")]
+        [InlineData("1, 2, Н, 3, Н, 4, 5, Н", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, false, "Н")]
+        [InlineData("1, 2, Н, 3, Н, 4, 5 или Н", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, false, "Н")]
+        [InlineData("1, 2, 3, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, null, true, "Н")]
+        [InlineData("1, 2, 3, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", null, true, "Н")]
 
-        [InlineData("1, 2,, 3,, 4, 5,", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", false, null)]
-        [InlineData("1, 2,, 3,, 4, 5 или ", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", false, null)]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", true, null)]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", true, null)]
+        [InlineData("1, 2,, 3,, 4, 5,", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", false, null)]
+        [InlineData("1, 2,, 3,, 4, 5 или ", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", false, null)]
+        [InlineData("1, 2, 3, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", true, null)]
+        [InlineData("1, 2, 3, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", true, null)]
 
-        [InlineData("1, 2,Н, 3,Н, 4, 5,Н", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", false, "Н")]
-        [InlineData("1, 2,Н, 3,Н, 4, 5 или Н", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", false, "Н")]
-        [InlineData("1, 2, 3, 4, 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", true, "Н")]
-        [InlineData("1, 2, 3, 4 или 5", new object[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", true, "Н")]
-        public void JoinTest(string expected, object[] value, string separator, string lastSeparator, string separatorBeforeNullAndEmptyValue,
+        [InlineData("1, 2,Н, 3,Н, 4, 5,Н", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", false, "Н")]
+        [InlineData("1, 2,Н, 3,Н, 4, 5 или Н", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", false, "Н")]
+        [InlineData("1, 2, 3, 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", null, ",", true, "Н")]
+        [InlineData("1, 2, 3, 4 или 5", new object?[] { 1, 2, null, 3, null, 4, 5, null }, ", ", " или ", ",", true, "Н")]
+        public void JoinTest(string expected, object?[] value, string separator, string lastSeparator, string separatorBeforeNullAndEmptyValue,
             bool skipNullAndEmptyValues, string replaceNullAndEmptyValuesWith)
         {
             var result = StringHelper.Join(value, separator, lastSeparator, separatorBeforeNullAndEmptyValue, skipNullAndEmptyValues, replaceNullAndEmptyValuesWith);
@@ -112,7 +112,7 @@ namespace Orlum.Text.Tests.Unit
         {
             var result = new List<object[]>();
 
-            var value1 = new object[] { 1, 2, null, 3, null, 4, 5 };
+            var value1 = new object?[] { 1, 2, null, 3, null, 4, 5 };
 
             result.Add(new object[] { "1, 2, , 3, , 4, 5", new JoinParameters(value1, ", ") });
             result.Add(new object[] { "1, 2, , 3, , 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или " } });
@@ -134,7 +134,7 @@ namespace Orlum.Text.Tests.Unit
             result.Add(new object[] { "1, 2, 3, 4, 5", new JoinParameters(value1, ", ") { separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
             result.Add(new object[] { "1, 2, 3, 4 или 5", new JoinParameters(value1, ", ") { lastSeparator = " или ", separatorBeforeNullAndEmptyValue = ",", skipNullAndEmptyValues = true, replaceNullAndEmptyValuesWith = "Н" } });
 
-            var value2 = new object[] { 1, 2, null, 3, null, 4, 5, null };
+            var value2 = new object?[] { 1, 2, null, 3, null, 4, 5, null };
 
             result.Add(new object[] { "1, 2, , 3, , 4, 5, ", new JoinParameters(value2, ", ") });
             result.Add(new object[] { "1, 2, , 3, , 4, 5 или ", new JoinParameters(value2, ", ") { lastSeparator = " или " } });
@@ -162,7 +162,7 @@ namespace Orlum.Text.Tests.Unit
 
         public class JoinParameters
         {
-            public object[] value;
+            public object?[] value;
             public string separator;
             public string lastSeparator { set { _lastSeparator = value; } }
             public string separatorBeforeNullAndEmptyValue { set { _separatorBeforeNullAndEmptyValue = value; } }
@@ -170,7 +170,7 @@ namespace Orlum.Text.Tests.Unit
             public string replaceNullAndEmptyValuesWith { set { _replaceNullAndEmptyValuesWith = value; } }
 
 
-            public JoinParameters(object[] value, string separator)
+            public JoinParameters(object?[] value, string separator)
             {
                 this.value = value;
                 this.separator = separator;

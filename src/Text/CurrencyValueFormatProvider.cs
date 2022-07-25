@@ -1,23 +1,18 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text.RegularExpressions;
-using System.Diagnostics.Contracts;
+﻿using System.Globalization;
 
 
 namespace Orlum.Text
 {
     public class CurrencyValueFormatProvider : IFormatProvider
     {
-        private CultureInfo _cultureInfo;
+        private CultureInfo? _cultureInfo;
         private string _isoCurrencySymbol;
         private bool _useCurrencySpecificPositiveNegativePatterns;
         private bool _updateNumberFormatInfo = true;
-        private NumberFormatInfo _numberFormatInfo;
+        private NumberFormatInfo? _numberFormatInfo;
 
 
-        public CultureInfo CultureInfo 
+        public CultureInfo? CultureInfo 
         {
             get => _cultureInfo;
             set
@@ -69,10 +64,10 @@ namespace Orlum.Text
         /// Initializes a new instance of the <see cref="CurrencyValueFormatProvider"/> class based on the specified culture information.
         /// </summary>
         /// <param name="cultureInfo">Culture-specific information using for dates and numbers formatting.</param>
-        public CurrencyValueFormatProvider(string isoCurrency, CultureInfo cultureInfo = null)
+        public CurrencyValueFormatProvider(string isoCurrencySymbol, CultureInfo? cultureInfo = null)
         {
             CultureInfo = cultureInfo;
-            ISOCurrencySymbol = isoCurrency;
+            ISOCurrencySymbol = isoCurrencySymbol;
         }
 
 
@@ -80,7 +75,7 @@ namespace Orlum.Text
         /// Initializes a new instance of the <see cref="CurrencyValueFormatProvider"/> class based on the specified culture information.
         /// </summary>
         /// <param name="cultureInfo">Culture-specific information using for dates and numbers formatting.</param>
-        public CurrencyValueFormatProvider(string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, CultureInfo cultureInfo = null)
+        public CurrencyValueFormatProvider(string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, CultureInfo? cultureInfo = null)
         {
             CultureInfo = cultureInfo;
             ISOCurrencySymbol = isoCurrencySymbol;
@@ -93,7 +88,7 @@ namespace Orlum.Text
         /// </summary>
         /// <param name="formatType">An object that specifies the type of format object to return.</param>
         /// <returns></returns>
-        public object GetFormat(Type formatType)
+        public object? GetFormat(Type? formatType)
         {
             if (_updateNumberFormatInfo)
             {
@@ -103,7 +98,7 @@ namespace Orlum.Text
                 _updateNumberFormatInfo = false;
             }
 
-            return _numberFormatInfo.GetFormat(formatType);
+            return _numberFormatInfo!.GetFormat(formatType);
         }
 
 
@@ -115,10 +110,6 @@ namespace Orlum.Text
         /// <returns></returns>
         private static NumberFormatInfo CloneAndUpdateNumberFormatInfo(NumberFormatInfo sourceNumberFormatInfo, string isoCurrencySymbol, bool updateCurrencySymbol, bool updateCurrencyPositiveNegativePatterns)
         {
-            Contract.Ensures(sourceNumberFormatInfo != null);
-            Contract.Ensures(isoCurrencySymbol != null);
-            Contract.Ensures(Contract.Result<NumberFormatInfo>() != null);
-
             var currencyNumberFormatInfo = GetCurrencyNumberFormatInfo(isoCurrencySymbol);
 
             var result = (NumberFormatInfo)sourceNumberFormatInfo.Clone();
@@ -143,9 +134,6 @@ namespace Orlum.Text
         /// <returns>Culture information of the country/region using specified currency.</returns>
         private static NumberFormatInfo GetCurrencyNumberFormatInfo(string isoCurrencySymbol)
         {
-            Contract.Ensures(isoCurrencySymbol != null);
-            Contract.Ensures(Contract.Result<NumberFormatInfo>() != null);
-
             var result = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
                 .Where(culture => string.Compare(new RegionInfo(culture.LCID).ISOCurrencySymbol, isoCurrencySymbol, true) == 0)
                 .OrderByDescending(culture =>

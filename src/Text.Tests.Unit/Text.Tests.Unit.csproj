@@ -5,6 +5,8 @@
     <IsPackable>false</IsPackable>
     <AssemblyName>Orlum.Text.Tests.Unit</AssemblyName>
     <RootNamespace>Orlum.Text.Tests.Unit</RootNamespace>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

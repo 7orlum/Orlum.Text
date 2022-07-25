@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics.Contracts;
+﻿using System.Collections.Immutable;
 
 
 namespace Orlum.Text
@@ -36,22 +33,20 @@ namespace Orlum.Text
         /// </summary>
         public GrammaticalNumber MatchGrammaticalNumber(double number)
         {
-            Contract.Ensures(GrammaticalNumbers.Contains(Contract.Result<GrammaticalNumber>()));
-
-            //Fractional numbers
-            if (Math.Round(number) != number)
-                return GrammaticalNumber.Fractional;
-
-            //Integer numbers
-            switch (Math.Abs(number))
+            var isInteger = Math.Truncate(number) == number;
+            
+            var result = (isInteger, Math.Abs(number)) switch
             {
-                case 1:
-                    return GrammaticalNumber.Singular;
-                case double n when n > 1 && n < 5:
-                    return GrammaticalNumber.Paucal;
-                default:
-                    return GrammaticalNumber.Plural;
-            }
+                (true, 1) => GrammaticalNumber.Singular,
+                (true, > 1 and < 5) => GrammaticalNumber.Paucal,
+                (true, _) => GrammaticalNumber.Plural,
+                (false, _) => GrammaticalNumber.Fractional
+            };
+
+            if (!GrammaticalNumbers.Contains(result))
+                throw new ApplicationException("Unexpected GrammaticalNumber value");
+
+            return result;
         }
     }
 }

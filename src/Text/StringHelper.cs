@@ -52,15 +52,15 @@ namespace Orlum.Text
         /// */
         ///</code>
         ///</example>
-        public static string Join(string[] value, string separator, string lastSeparator = null, 
-            string separatorBeforeNullAndEmptyValue = null, bool skipNullAndEmptyValues = false, string replaceNullAndEmptyValuesWith = null)
+        public static string Join(string?[] value, string separator, string? lastSeparator = null, 
+            string? separatorBeforeNullAndEmptyValue = null, bool skipNullAndEmptyValues = false, string? replaceNullAndEmptyValuesWith = null)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));
 
             var result = new StringBuilder(value.Length * 2);
 
-            string previousValue = null;
+            string? previousValue = null;
             bool valuesWasJoinedAlready = false;
 
             foreach (var element in value)
@@ -123,8 +123,8 @@ namespace Orlum.Text
         /// <returns>A string that consists of the strings in value delimited by one of three separator strings.
         /// -or-
         /// <see cref="String.Empty"/> if count is zero, value has no elements, or separator and all the elements of value are Empty.</returns>
-        public static string Join(object[] value, string separator, string lastSeparator = null,
-            string separatorBeforeNullAndEmptyValue = null, bool skipNullAndEmptyValues = false, string replaceNullAndEmptyValuesWith = null)
+        public static string Join(object?[] value, string separator, string? lastSeparator = null,
+            string? separatorBeforeNullAndEmptyValue = null, bool skipNullAndEmptyValues = false, string? replaceNullAndEmptyValuesWith = null)
         {
             return Join(value.Select(e => e?.ToString()).ToArray(), separator, lastSeparator, separatorBeforeNullAndEmptyValue, skipNullAndEmptyValues, replaceNullAndEmptyValuesWith);
         }

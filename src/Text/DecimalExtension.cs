@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
 
 namespace Orlum.Text.DecimalExtention
 {
     public static class DecimalExtensionMethods
     {
-        private static Dictionary<string, CultureInfo> _currencyCultureInfoDictionary = null;
+        private static Dictionary<string, CultureInfo> _currencyCultureInfoDictionary = new();
 
 
         /// <summary>
@@ -19,7 +16,7 @@ namespace Orlum.Text.DecimalExtention
         /// <param name="isoCurrency">Three-character ISO 4217 currency symbol</param>
         /// <param name="cultureInfo">Prefered culture-specific information that will be used for formatting numeric values</param>
         /// <returns></returns>
-        public static string ToString(this decimal amount, string format, string isoCurrency, CultureInfo cultureInfo = null)
+        public static string ToString(this decimal amount, string format, string isoCurrency, CultureInfo? cultureInfo = null)
         {
             if (isoCurrency == null)
                 throw new ArgumentNullException(nameof(isoCurrency));
@@ -74,7 +71,7 @@ namespace Orlum.Text.DecimalExtention
             if (isoCurrency == null)
                 throw new ArgumentNullException(nameof(isoCurrency));
 
-            if (_currencyCultureInfoDictionary == null)
+            if (_currencyCultureInfoDictionary.Count == 0)
                 _currencyCultureInfoDictionary = CultureInfo.GetCultures(CultureTypes.SpecificCultures)
                         .Select(culture => (Culture: culture, Currency: new RegionInfo(culture.LCID).ISOCurrencySymbol))
                         .GroupBy(cultureCurrencyPair => cultureCurrencyPair.Currency)
