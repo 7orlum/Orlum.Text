@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace Orlum.Text
 {
     /// <summary>
-    /// The custom string formatter that choose the correct, in accordance with language agreement, form of the phrase depending on the given numeric argument
+    /// The custom string formatter that choose the correct, in accordance with language agreement, form of the phrase depending on the given numeric arguments
     /// </summary>
     /// <example>The following example shows how to use <see cref="NumericalPhraseFormatProvider"/> to format string.
     /// <code>
@@ -15,15 +15,40 @@ namespace Orlum.Text
     /// {
     ///    public static void Main()
     ///    {
-    ///        Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", 3.5));
-    ///        Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", 1));
-    ///        Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", 0));
+    ///        var value1 = 3.5;
+    ///        var value2 = 1;
+    ///        var value3 = 0;
+    ///        
+    ///        //Using interpolated strings and Orlum.Text.Format.NP function
+    ///        Console.WriteLine(Format.NumericalPhrase($"{value1:NP;RU;Запрошен;Запрошено;Запрошено} {value1} {value1:NP;RU;рубль;рубля;рублей}"));
+    ///        Console.WriteLine(Format.NumericalPhrase($"{value2:NP;RU;Запрошен;Запрошено;Запрошено} {value2} {value2:NP;RU;рубль;рубля;рублей}"));
+    ///        Console.WriteLine(Format.NumericalPhrase($"{value3:NP;RU;Запрошен;Запрошено;Запрошено} {value3} {value3:NP;RU;рубль;рубля;рублей}"));
+    ///        
+    ///        //Using regular format strings and Orlum.Text.Format.NumericalPhrase function
+    ///        Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value1));
+    ///        Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value2));
+    ///        Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value3));
+    ///        Console.WriteLine();
+    ///        
+    ///        //Using regular format strings and System.String.Format function
+    ///        Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value1));
+    ///        Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value2));
+    ///        Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value3));
+    ///        Console.WriteLine();
     ///    }
     /// }
     ///
     /// /*
-    /// This code produces the following output.
+    /// This code produces the following output:
     /// 
+    /// Запрошено 3,5 рубля
+    /// Запрошен 1 рубль
+    /// Запрошено 0 рублей
+    ///        
+    /// Запрошено 3,5 рубля
+    /// Запрошен 1 рубль
+    /// Запрошено 0 рублей
+    ///        
     /// Запрошено 3,5 рубля
     /// Запрошен 1 рубль
     /// Запрошено 0 рублей

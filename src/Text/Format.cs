@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Orlum.Text
 {
@@ -8,13 +6,13 @@ namespace Orlum.Text
     {
         private static readonly Dictionary<CultureInfo, NumericalPhraseFormatProvider> _numericalPhraseFormatProviders = new();
         private static readonly Dictionary<CurrencyValueFormatProviderKey, CurrencyValueFormatProvider> _currencyValueFormatProviders = new();
-        
-        public static string NP(FormattableString formattableString)
+
+        public static string NumericalPhrase(FormattableString formattableString)
         {
-            return NP(null, formattableString);
+            return NumericalPhrase(null, formattableString);
         }
 
-        public static string NP(CultureInfo? cultureInfo, FormattableString formattableString)
+        public static string NumericalPhrase(CultureInfo? cultureInfo, FormattableString formattableString)
         {
             if (formattableString == null)
                 throw new ArgumentNullException(nameof(formattableString));
@@ -25,12 +23,12 @@ namespace Orlum.Text
             return formattableString.ToString(_numericalPhraseFormatProviders[cultureInfo ?? CultureInfo.CurrentCulture]);
         }
 
-        public static string NumericalPhrase(string format, params object[] args)
+        public static string NumericalPhrase(RawString format, params object[] args)
         {
             return NumericalPhrase(null, format, args);
         }
 
-        public static string NumericalPhrase(CultureInfo? cultureInfo, string format, params object[] args)
+        public static string NumericalPhrase(CultureInfo? cultureInfo, RawString format, params object[] args)
         {
             if (format == null)
                 throw new ArgumentNullException(nameof(format));
@@ -38,25 +36,25 @@ namespace Orlum.Text
             if (!_numericalPhraseFormatProviders.ContainsKey(cultureInfo ?? CultureInfo.CurrentCulture))
                 _numericalPhraseFormatProviders.Add(cultureInfo ?? CultureInfo.CurrentCulture, new NumericalPhraseFormatProvider(cultureInfo));
 
-            return string.Format(_numericalPhraseFormatProviders[cultureInfo ?? CultureInfo.CurrentCulture], format, args);
+            return string.Format(_numericalPhraseFormatProviders[cultureInfo ?? CultureInfo.CurrentCulture], format.Value, args);
         }
 
-        public static string CV(string isoCurrencySymbol, FormattableString formattableString)
+        public static string CurrencyValue(string isoCurrencySymbol, FormattableString formattableString)
         {
-            return CV(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, formattableString);
+            return CurrencyValue(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, formattableString);
         }
 
-        public static string CV(CultureInfo? cultureInfo, string isoCurrencySymbol, FormattableString formattableString)
+        public static string CurrencyValue(CultureInfo? cultureInfo, string isoCurrencySymbol, FormattableString formattableString)
         {
-            return CV(cultureInfo, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, formattableString);
+            return CurrencyValue(cultureInfo, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, formattableString);
         }
 
-        public static string CV(string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, FormattableString formattableString)
+        public static string CurrencyValue(string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, FormattableString formattableString)
         {
-            return CV(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns, formattableString);
+            return CurrencyValue(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns, formattableString);
         }
 
-        public static string CV(CultureInfo? cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, FormattableString formattableString)
+        public static string CurrencyValue(CultureInfo? cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, FormattableString formattableString)
         {
             if (formattableString == null)
                 throw new ArgumentNullException(nameof(formattableString));
@@ -72,7 +70,7 @@ namespace Orlum.Text
             return formattableString.ToString(_currencyValueFormatProviders[key]);
         }
 
-        public static string CurrencyValue(string isoCurrencySymbol, string format, params object[] args)
+        public static string CurrencyValue(string isoCurrencySymbol, RawString format, params object[] args)
         {
             return CurrencyValue(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, format, args);
         }
@@ -82,12 +80,12 @@ namespace Orlum.Text
             return CurrencyValue(null, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns, format, args);
         }
 
-        public static string CurrencyValue(CultureInfo? cultureInfo, string isoCurrencySymbol, string format, params object[] args)
+        public static string CurrencyValue(CultureInfo? cultureInfo, string isoCurrencySymbol, RawString format, params object[] args)
         {
             return CurrencyValue(cultureInfo, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, format, args);
         }
 
-        public static string CurrencyValue(CultureInfo? cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, string format, params object[] args)
+        public static string CurrencyValue(CultureInfo? cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, RawString format, params object[] args)
         {
             if (format == null)
                 throw new ArgumentNullException(nameof(format));
@@ -100,7 +98,7 @@ namespace Orlum.Text
             if (!_currencyValueFormatProviders.ContainsKey(key))
                 _currencyValueFormatProviders.Add(key, new CurrencyValueFormatProvider(isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns, cultureInfo));
 
-            return string.Format(_currencyValueFormatProviders[key], format, args);
+            return string.Format(_currencyValueFormatProviders[key], format.Value, args);
         }
         
         [Obsolete("This function signature is obsolete. Use public static string NP(CultureInfo cultureInfo, String format, params object[] args)")]
