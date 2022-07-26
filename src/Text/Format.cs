@@ -100,41 +100,6 @@ namespace Orlum.Text
 
             return string.Format(_currencyValueFormatProviders[key], format.Value, args);
         }
-        
-        [Obsolete("This function signature is obsolete. Use public static string NP(CultureInfo cultureInfo, String format, params object[] args)")]
-        public static string NP(FormattableString formattableString, CultureInfo? cultureInfo = null)
-        {
-            if (formattableString == null)
-                throw new ArgumentNullException(nameof(formattableString));
-
-            if (!_numericalPhraseFormatProviders.ContainsKey(cultureInfo ?? CultureInfo.CurrentCulture))
-                _numericalPhraseFormatProviders.Add(cultureInfo ?? CultureInfo.CurrentCulture, new NumericalPhraseFormatProvider(cultureInfo));
-
-            return formattableString.ToString(_numericalPhraseFormatProviders[cultureInfo ?? CultureInfo.CurrentCulture]);
-        }
-
-        [Obsolete("This function signature is obsolete. Use public static string CV(CultureInfo cultureInfo, string isoCurrencySymbol, FormattableString formattableString)")]
-        public static string CV(FormattableString formattableString, string isoCurrencySymbol, CultureInfo? cultureInfo = null)
-        {
-            return CV(formattableString, isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns: false, cultureInfo);
-        }
-
-        [Obsolete("This function signature is obsolete. Use public static string CV(CultureInfo cultureInfo, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, FormattableString formattableString)")]
-        public static string CV(FormattableString formattableString, string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, CultureInfo? cultureInfo = null)
-        {
-            if (formattableString == null)
-                throw new ArgumentNullException(nameof(formattableString));
-
-            if (isoCurrencySymbol == null)
-                throw new ArgumentNullException(nameof(isoCurrencySymbol));
-
-            var key = new CurrencyValueFormatProviderKey(isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns, cultureInfo);
-
-            if (!_currencyValueFormatProviders.ContainsKey(key))
-                _currencyValueFormatProviders.Add(key, new CurrencyValueFormatProvider(isoCurrencySymbol, useCurrencySpecificPositiveNegativePatterns, cultureInfo));
-
-            return formattableString.ToString(_currencyValueFormatProviders[key]);
-        }
 
         private record CurrencyValueFormatProviderKey(string isoCurrencySymbol, bool useCurrencySpecificPositiveNegativePatterns, CultureInfo? cultureInfo);
     }
