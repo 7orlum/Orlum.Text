@@ -1,6 +1,6 @@
-﻿using Xunit;
+﻿using Orlum.Text.DecimalExtention;
 using System.Globalization;
-using Orlum.Text.DecimalExtention;
+using Xunit;
 
 namespace Orlum.Text.Tests.Unit
 {

@@ -35,14 +35,14 @@ public class FormatterExample
        var value3 = 0;
        
        //Using interpolated strings and Orlum.Text.Format.NP function
-       Console.WriteLine(Format.NumericalPhrase($"{value1:NP;RU;Запрошен;Запрошено;Запрошено} {value1} {value1:NP;RU;рубль;рубля;рублей}"));
-       Console.WriteLine(Format.NumericalPhrase($"{value2:NP;RU;Запрошен;Запрошено;Запрошено} {value2} {value2:NP;RU;рубль;рубля;рублей}"));
-       Console.WriteLine(Format.NumericalPhrase($"{value3:NP;RU;Запрошен;Запрошено;Запрошено} {value3} {value3:NP;RU;рубль;рубля;рублей}"));
+       Console.WriteLine(Format.NumericalPhrase(CultureInfo.CurrentCulture, $"{value1:NP;RU;Запрошен;Запрошено;Запрошено} {value1} {value1:NP;RU;рубль;рубля;рублей}"));
+       Console.WriteLine(Format.NumericalPhrase(CultureInfo.CurrentCulture, $"{value2:NP;RU;Запрошен;Запрошено;Запрошено} {value2} {value2:NP;RU;рубль;рубля;рублей}"));
+       Console.WriteLine(Format.NumericalPhrase(CultureInfo.CurrentCulture, $"{value3:NP;RU;Запрошен;Запрошено;Запрошено} {value3} {value3:NP;RU;рубль;рубля;рублей}"));
        
        //Using regular format strings and Orlum.Text.Format.NumericalPhrase function
-       Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value1));
-       Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value2));
-       Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value3));
+       Console.WriteLine(Format.NumericalPhrase(CultureInfo.CurrentCulture, "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value1));
+       Console.WriteLine(Format.NumericalPhrase(CultureInfo.CurrentCulture, "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value2));
+       Console.WriteLine(Format.NumericalPhrase(CultureInfo.CurrentCulture, "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value3));
        Console.WriteLine();
        
        //Using regular format strings and System.String.Format function

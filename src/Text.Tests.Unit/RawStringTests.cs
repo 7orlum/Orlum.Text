@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Globalization;
+using Xunit;
 
 namespace Orlum.Text.Tests.Unit
 {
@@ -8,7 +9,7 @@ namespace Orlum.Text.Tests.Unit
         public void CallingMethodWithStringArgumentInvokesMethodOverloadWithRawStringParameter()
         {
             var number = 1;
-            var result = Format.NumericalPhrase("I have got {0} {0:NP;en;cat;cats}", number);
+            var result = Format.NumericalPhrase(CultureInfo.CurrentCulture, "I have got {0} {0:NP;en;cat;cats}", number);
             Assert.Equal("I have got 1 cat", result);
         }
 
@@ -16,7 +17,7 @@ namespace Orlum.Text.Tests.Unit
         public void CallingMethodWithFormattableStringArgumentInvokesMethodOverloadWithFormattableStringParameter()
         {
             var number = 1;
-            var result = Format.NumericalPhrase($"I have got {number} {number:NP;en;cat;cats}");
+            var result = Format.NumericalPhrase(CultureInfo.CurrentCulture, $"I have got {number} {number:NP;en;cat;cats}");
             Assert.Equal("I have got 1 cat", result);
         }
     }
