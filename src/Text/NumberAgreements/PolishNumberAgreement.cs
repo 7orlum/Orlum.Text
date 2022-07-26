@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 
-
 namespace Orlum.Text
 {
     /// <summary>
@@ -18,7 +17,6 @@ namespace Orlum.Text
         public IList<GrammaticalNumber> GrammaticalNumbers => ImmutableArray.Create<GrammaticalNumber>(
             GrammaticalNumber.Singular, GrammaticalNumber.Paucal, GrammaticalNumber.Plural, GrammaticalNumber.Fractional);
 
-
         /// <summary>
         /// Describes how to get correct format string.
         /// </summary>
@@ -26,7 +24,6 @@ namespace Orlum.Text
             $"Expected {GrammaticalNumbers.Count} forms of a phrase inflected for number and splited by semicolon. " +
             "Specify inflections of the phrase required to be compatible with numbers 1, 2, 5 and ½ in that exact order, " +
             "for example {0:NP;PL;litr;litry;litrów;litra}";
-
 
         /// <summary>
         /// Finds the concord grammatical number value to agree numerical phrase with specified number.

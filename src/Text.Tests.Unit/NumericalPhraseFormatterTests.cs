@@ -1,8 +1,5 @@
 ﻿using Xunit;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-
 
 namespace Orlum.Text.Tests.Unit
 {
@@ -38,7 +35,6 @@ namespace Orlum.Text.Tests.Unit
             Assert.Equal(expected, result);
         }
 
-
         [Theory]
         [InlineData("23.0000", 23, "{0:N4}")]
         [InlineData("", null, "{0:N4}")]
@@ -49,7 +45,6 @@ namespace Orlum.Text.Tests.Unit
             Assert.Equal(expected, result);
         }
 
-
         [Theory]
         [InlineData("cats", null, "{0:NP;en;cat;cats}")]
         [InlineData("cats", 0, "{0:NP;en;cat;cats}")]
@@ -59,7 +54,6 @@ namespace Orlum.Text.Tests.Unit
 
             Assert.Equal(expected, result);
         }
-
 
         [Theory]
         [InlineData("I have got 6 cats", 6, "I have got {0} {0:np;EN;cat;cats}")]
@@ -73,7 +67,6 @@ namespace Orlum.Text.Tests.Unit
             Assert.Equal(expected, result);
         }
 
-
         [Theory]
         [InlineData("Argument must be convertable to double", "one", "{0:NP;ru;рубль;рубля;рублей}")]
         [InlineData("Argument must be convertable to double", new int[] { 1, 2 }, "{0:NP;ru;рубль;рубля;рублей}")]
@@ -82,7 +75,6 @@ namespace Orlum.Text.Tests.Unit
             var e = Assert.Throws<ArgumentException>(() => string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number));
             Assert.Equal(expected, e.Message);
         }
-
 
         [Theory]
         [InlineData(
@@ -100,7 +92,6 @@ namespace Orlum.Text.Tests.Unit
             Assert.StartsWith(expected, e.Message, StringComparison.InvariantCultureIgnoreCase);
         }
 
-
         [Theory]
         [InlineData("The given key '-' was not present in the dictionary.", 5, "{0:NP;-;cat;cats;}")]
         public void ThrowsExceptionOnUnknownLanguageSpecifier(string expected, object number, string format)
@@ -108,7 +99,6 @@ namespace Orlum.Text.Tests.Unit
             var e = Assert.Throws<KeyNotFoundException>(() => string.Format(new NumericalPhraseFormatProvider(CultureInfo.InvariantCulture), format, number));
             Assert.Equal(expected, e.Message);
         }
-
 
         [Fact]
         public void AllowsCustomSetOfNumberAgreements()

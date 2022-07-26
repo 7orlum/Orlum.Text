@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-
+﻿using System.Globalization;
 
 namespace Orlum.Text.StringExtention
 {
@@ -27,7 +25,6 @@ namespace Orlum.Text.StringExtention
             return StringHelper.CapitalizeFirstLetter(value, CultureInfo.CurrentCulture);
         }
 
-
         /// <summary>
         /// Returns a copy of a string with first letter converted to uppercase.
         /// </summary>
@@ -43,7 +40,6 @@ namespace Orlum.Text.StringExtention
         {
             return StringHelper.CapitalizeFirstLetter(value, culture);
         }
-
         
         /// <summary>
         /// Returns a copy of a string with first letter converted to lowercase.
@@ -62,7 +58,6 @@ namespace Orlum.Text.StringExtention
         {
             return StringHelper.UncapitalizeFirstLetter(value, CultureInfo.CurrentCulture);
         }
-
 
         /// <summary>
         /// Returns a copy of a string with first letter converted to lowercase.

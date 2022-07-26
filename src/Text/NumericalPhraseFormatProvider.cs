@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 
-
 namespace Orlum.Text
 {
     /// <summary>
@@ -60,18 +59,15 @@ namespace Orlum.Text
     {
         private readonly NumericalPhraseFormatter _formatter = new NumericalPhraseFormatter();
 
-
         /// <summary>
         /// Language codes and corresponding number agreements to choose a correct phrase form.
         /// </summary>
         public Dictionary<string, INumberAgreement> NumberAgreements { get; private set; } = new Dictionary<string, INumberAgreement>(StringComparer.OrdinalIgnoreCase);
 
-
         /// <summary>
         /// A culture-specific information using for dates and numbers formatting.
         /// </summary>
         public CultureInfo? CultureInfo { get; set; }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NumericalPhraseFormatProvider"/> class based on the specified culture information.
@@ -85,7 +81,6 @@ namespace Orlum.Text
             NumberAgreements.Add("ru", new RussianNumberAgreement());
         }
 
-
         /// <summary>
         /// Returns an object that provides formatting services for the specified type.
         /// </summary>
@@ -98,7 +93,6 @@ namespace Orlum.Text
             else
                 return null;
         }
-
 
         private class NumericalPhraseFormatter : ICustomFormatter
         {
@@ -141,7 +135,6 @@ namespace Orlum.Text
                 return forms[agreement.GrammaticalNumbers.IndexOf(agreement.MatchGrammaticalNumber(number))];
             }
 
-            
             private bool TryParseFormat(string? format, out string language, out string[] forms)
             {
                 language = string.Empty;
@@ -160,7 +153,6 @@ namespace Orlum.Text
                 return true;
             }
 
-            
             private string HandleOtherFormats(string? format, object? arg, CultureInfo? culture)
             {
                 if (arg is IFormattable)

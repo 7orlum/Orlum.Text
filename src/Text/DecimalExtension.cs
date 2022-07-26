@@ -1,12 +1,10 @@
 ﻿using System.Globalization;
 
-
 namespace Orlum.Text.DecimalExtention
 {
     public static class DecimalExtensionMethods
     {
         private static Dictionary<string, CultureInfo> _currencyCultureInfoDictionary = new();
-
 
         /// <summary>
         /// Changes default currency symbol to a currency symbol for specified currency and formats number. Negative and positive patterns also will be changed.
@@ -33,7 +31,6 @@ namespace Orlum.Text.DecimalExtention
             return amount.ToString(format, CustomizeNumberFormatProvider(cultureInfo.NumberFormat, isoCurrency));
         }
 
-
         /// <summary>
         /// Change currency symbol and positive negative patterns in number format to specific ones for specified currency.
         /// </summary>
@@ -59,7 +56,6 @@ namespace Orlum.Text.DecimalExtention
 
             return result;
         }
-
 
         /// <summary>
         /// Looks for a country/region using specified currency and returns that region culture information.

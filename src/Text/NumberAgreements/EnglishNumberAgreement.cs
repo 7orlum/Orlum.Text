@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 
-
 namespace Orlum.Text
 {
     /// <summary>
@@ -21,12 +20,10 @@ namespace Orlum.Text
         public IList<GrammaticalNumber> GrammaticalNumbers => ImmutableArray.Create<GrammaticalNumber>(
             GrammaticalNumber.Singular, GrammaticalNumber.Plural);
 
-
         /// <summary>
         /// Describes how to get correct format string.
         /// </summary>
         public string DescriptionOfFormatString => "Expected singular and plural forms of the inflected phrase in that exact order, for example {0:NP;EN;cow;cows}";
-
 
         /// <summary>
         /// Finds the concord grammatical number value to agree numerical phrase with specified number.

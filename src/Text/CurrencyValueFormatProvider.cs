@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 
-
 namespace Orlum.Text
 {
     public class CurrencyValueFormatProvider : IFormatProvider
@@ -10,7 +9,6 @@ namespace Orlum.Text
         private bool _useCurrencySpecificPositiveNegativePatterns;
         private bool _updateNumberFormatInfo = true;
         private NumberFormatInfo? _numberFormatInfo;
-
 
         public CultureInfo? CultureInfo 
         {
@@ -24,7 +22,6 @@ namespace Orlum.Text
                 }
             }
         }
-
 
         public string ISOCurrencySymbol
         {
@@ -45,7 +42,6 @@ namespace Orlum.Text
             }
         }
 
-
         public bool UseCurrencySpecificPositiveNegativePatterns
         {
             get => _useCurrencySpecificPositiveNegativePatterns;
@@ -59,7 +55,6 @@ namespace Orlum.Text
             }
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyValueFormatProvider"/> class based on the specified culture information.
         /// </summary>
@@ -69,7 +64,6 @@ namespace Orlum.Text
             CultureInfo = cultureInfo;
             ISOCurrencySymbol = isoCurrencySymbol;
         }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CurrencyValueFormatProvider"/> class based on the specified culture information.
@@ -81,7 +75,6 @@ namespace Orlum.Text
             ISOCurrencySymbol = isoCurrencySymbol;
             UseCurrencySpecificPositiveNegativePatterns = useCurrencySpecificPositiveNegativePatterns;
         }
-
 
         /// <summary>
         /// Returns an object that provides formatting services for the specified type.
@@ -100,7 +93,6 @@ namespace Orlum.Text
 
             return _numberFormatInfo!.GetFormat(formatType);
         }
-
 
         /// <summary>
         /// Clone the number format info and change currency symbol and positive negative patterns to ones from specified currency number format info.
@@ -125,7 +117,6 @@ namespace Orlum.Text
 
             return result;
         }
-
 
         /// <summary>
         /// Looks for a country/region using specified currency and returns that region culture information.

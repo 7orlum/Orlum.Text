@@ -1,9 +1,6 @@
-﻿using System;
-using System.Buffers;
+﻿using System.Buffers;
 using System.Text;
 using System.Globalization;
-using System.Linq;
-
 
 namespace Orlum.Text
 {
@@ -106,7 +103,6 @@ namespace Orlum.Text
             return result.ToString();
         }
 
-
         /// <summary>
         /// Concatenates string representation of all the elements of an object array and, the specified separator between each element.
         /// </summary>
@@ -129,7 +125,6 @@ namespace Orlum.Text
             return Join(value.Select(e => e?.ToString()).ToArray(), separator, lastSeparator, separatorBeforeNullAndEmptyValue, skipNullAndEmptyValues, replaceNullAndEmptyValuesWith);
         }
 
-
         /// <summary>
         /// Returns a copy of a string with first letter converted to uppercase.
         /// </summary>
@@ -147,7 +142,6 @@ namespace Orlum.Text
         {
             return CapitalizeFirstLetter(value, CultureInfo.CurrentCulture);
         }
-
 
         /// <summary>
         /// Returns a copy of a string with first letter converted to uppercase.
@@ -172,7 +166,6 @@ namespace Orlum.Text
             else
                 return Rune.ToUpper(rune, culture) + value[charsConsumed..];
         }
-
         
         /// <summary>
         /// Returns a copy of a string with first letter converted to lowercase.
@@ -191,7 +184,6 @@ namespace Orlum.Text
         {
             return UncapitalizeFirstLetter(value, CultureInfo.CurrentCulture);
         }
-
 
         /// <summary>
         /// Returns a copy of a string with first letter converted to lowercase.

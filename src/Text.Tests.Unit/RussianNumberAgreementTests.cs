@@ -1,6 +1,5 @@
 ﻿using Xunit;
 
-
 namespace Orlum.Text.Tests.Unit
 {
     public class RussianNumberAgreementTests
@@ -34,7 +33,6 @@ namespace Orlum.Text.Tests.Unit
 
             Assert.Equal(expected, result);
         }
-
 
         [Fact]
         internal void ThereAreThreeGramaticalNumbers()

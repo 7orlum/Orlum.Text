@@ -1,9 +1,5 @@
 ﻿using Xunit;
-using System;
 using System.Globalization;
-using System.Linq;
-using System.Collections.Generic;
-
 
 namespace Orlum.Text.Tests.Unit
 {
@@ -26,7 +22,6 @@ namespace Orlum.Text.Tests.Unit
             Assert.Equal(expected, result);
         }
 
-
         [Theory]
         [InlineData("Grasshopper", "grasshopper")]
         [InlineData("HELP", "hELP")]
@@ -43,7 +38,6 @@ namespace Orlum.Text.Tests.Unit
 
             Assert.Equal(expected, result);
         }
-
 
         [Theory]
         [InlineData("1, 2, , 3, , 4, 5", new object?[] { 1, 2, null, 3, null, 4, 5 }, ", ", null, null, false, null)]
@@ -93,7 +87,6 @@ namespace Orlum.Text.Tests.Unit
             Assert.Equal(expected, result);
         }
 
-
         [Theory]
         [MemberData(nameof(ParametersForJoinOptionalParametersTest))]
         public void JoinOptionalParametersTest(string expected, JoinParameters parameters)
@@ -106,7 +99,6 @@ namespace Orlum.Text.Tests.Unit
 
             Assert.Equal(expected, result);
         }
-
 
         public static IEnumerable<object[]> ParametersForJoinOptionalParametersTest()
         {
@@ -159,7 +151,6 @@ namespace Orlum.Text.Tests.Unit
             return result;
         }
 
-
         public class JoinParameters
         {
             public object?[] value;
@@ -169,13 +160,11 @@ namespace Orlum.Text.Tests.Unit
             public bool skipNullAndEmptyValues { set { _skipNullAndEmptyValues = value; } }
             public string replaceNullAndEmptyValuesWith { set { _replaceNullAndEmptyValuesWith = value; } }
 
-
             public JoinParameters(object?[] value, string separator)
             {
                 this.value = value;
                 this.separator = separator;
             }
-
 
             public object[] ToArray()
             {
@@ -189,7 +178,6 @@ namespace Orlum.Text.Tests.Unit
 
                 return result.ToArray();
             }
-
 
             object _lastSeparator = Type.Missing;
             object _separatorBeforeNullAndEmptyValue = Type.Missing;

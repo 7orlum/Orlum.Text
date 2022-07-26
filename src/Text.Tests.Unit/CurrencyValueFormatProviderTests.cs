@@ -1,7 +1,5 @@
 ﻿using Xunit;
-using System;
 using System.Globalization;
-
 
 namespace Orlum.Text.Tests.Unit
 {
@@ -22,7 +20,6 @@ namespace Orlum.Text.Tests.Unit
             Assert.Equal(expected, result);
         }
 
-
         [Theory]
         [InlineData("2,00 ₽", 2, "C", "RUB")]
         [InlineData("109 928 830,00 $", 109928830, "C", "USD")]
@@ -32,7 +29,6 @@ namespace Orlum.Text.Tests.Unit
             var result = amount.ToString(format, new CurrencyValueFormatProvider(currency, CultureInfo.GetCultureInfo("ru-RU")));
             Assert.Equal(expected, result);
         }
-
 
         [Theory]
         [InlineData("2,34 ₽", 2.34, "C", "RUB")]
@@ -50,14 +46,12 @@ namespace Orlum.Text.Tests.Unit
             Assert.Equal(expected, result);
         }
 
-
         [Theory]
         [InlineData(2.34, "C", null)]
         public void TrowsExceptionIfCurrencyCodeIsNull(decimal amount, string format, string currency)
         {
             Assert.Throws<ArgumentNullException>(() => amount.ToString(format, new CurrencyValueFormatProvider(currency)));
         }
-
 
         [Theory]
         [InlineData("Value must be three-character ISO 4217 currency symbol", 2.34, null, "RU")]

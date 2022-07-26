@@ -1,6 +1,5 @@
 ﻿using Xunit;
 
-
 namespace Orlum.Text.Tests.Unit
 {
     public class PolishNumberAgreementTests
@@ -31,7 +30,6 @@ namespace Orlum.Text.Tests.Unit
 
             Assert.Equal(expected, result);
         }
-
 
         [Fact]
         internal void ThereAreFourGramaticalNumbers()

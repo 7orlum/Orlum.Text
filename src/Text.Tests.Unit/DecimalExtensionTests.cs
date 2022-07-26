@@ -1,8 +1,6 @@
 ﻿using Xunit;
-using System;
 using System.Globalization;
 using Orlum.Text.DecimalExtention;
-
 
 namespace Orlum.Text.Tests.Unit
 {
@@ -22,14 +20,12 @@ namespace Orlum.Text.Tests.Unit
             Assert.Equal(expected, result);
         }
 
-
         [Theory]
         [InlineData(2.34, "C", null)]
         public void ToStringTrowExceptionIfCurrencyCodeIsNull(decimal amount, string format, string currency)
         {
             Assert.Throws<ArgumentNullException>(() => amount.ToString(format, currency));
         }
-
 
         [Theory]
         [InlineData("Value must be three-character ISO 4217 currency symbol", 2.34, null, "RU")]
