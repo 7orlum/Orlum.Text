@@ -1,64 +1,73 @@
 ﻿# What is Orlum.Text?
 
-`NumericalPhraseFormatProvider` class is the main part of Orlum.Text. 
-You can use it to internationalize programs or generate the correct matched phrases in accordance with language agreement.
-`NumericalPhraseFormatProvider` is a `ICustomFormatter` that choose the correct form of the phrase depending on the given numeric argument. 
+The library helping internationalize your program. It generate correctly matched phrases in accordance with language agreement.
 English, Polish and Russian language number agreements are now implemented. You can add new languages by implementing `INumberAgreement` interface.
 
 # How can it be used?
 
-Call `String.Format` function with `NumericalPhraseFormatProvider` custom formatter to format string  
+Call `Format.NumericalPhrase` static function to format string depending on number and CurrentCulture 
 ```cs
-"{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}"
+Format.NumericalPhrase($"{number:NP;RU;Запрошен;Запрошено;Запрошено} {number} {number:NP;RU;рубль;рубля;рублей}");
 ```   
-Depending on `{0}` argument it will return `"Запрошено 3.5 рубля"`, `"Запрошен 1 рубль"` or `"Запрошено 0 рублей"`.  
+Depending on `number` value it will return `"Запрошено 3.5 рубля"`, `"Запрошен 1 рубль"` or `"Запрошено 0 рублей"`.  
   
 If you replace the format string to it english version  
 ```cs
-"Requested {0} {0:NP;EN;ruble;rubles}"
+"Requested {number} {number:NP;EN;dollar;dollars}"
 ```  
-function will return `"Requested 3.5 rubles"`, `"Requested 1 ruble"` and `"Requested 0 rubles"` for the same values of `{0}` argument.  
+function will return `"Requested 3.5 dollars"`, `"Requested 1 dollar"` and `"Requested 0 dollars"` for the same values of `{0}` argument.  
   
 If you replace the format string to it polish version  
 ```cs
-"Zażądano {0} {0:NP;PL;rubel;ruble;rubli;rubla}"
+"Zażądano {number} {number:NP;PL;złoty;złote;złotych;złoty}"
 ```  
-function will return `"Zażądano 3.5 rubla"`, `"Zażądano 1 rubel"` and `"Zażądano 0 rubli"` for the same values of `{0}` argument.  
+function will return `"Zażądano 3.5 złotych"`, `"Zażądano 1 złoty"` and `"Zażądano 0 złoty"` for the same values of `{0}` argument.  
   
 ```cs
 using Orlum.Text;
     
-public class NumericalPhraseFormatProviderExample
+public class FormatterExample
 {
-	public static void Main()
-	{
-		var f = new NumericalPhraseFormatProvider();
-
-		Console.WriteLine(string.Format(f, "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", 3.5));
-		Console.WriteLine(string.Format(f, "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", 1));
-		Console.WriteLine(string.Format(f, "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", 0));
-		Console.WriteLine(string.Format(f, "Requested {0} {0:NP;EN;ruble;rubles}", 3.5));
-		Console.WriteLine(string.Format(f, "Requested {0} {0:NP;EN;ruble;rubles}", 1));
-		Console.WriteLine(string.Format(f, "Requested {0} {0:NP;EN;ruble;rubles}", 0));
-		Console.WriteLine(string.Format(f, "Zażądano {0} {0:NP;PL;rubel;ruble;rubli;rubla}", 3.5));
-		Console.WriteLine(string.Format(f, "Zażądano {0} {0:NP;PL;rubel;ruble;rubli;rubla}", 1));
-		Console.WriteLine(string.Format(f, "Zażądano {0} {0:NP;PL;rubel;ruble;rubli;rubla}", 0));
-	}
+   public static void Main()
+   {
+       var value1 = 3.5;
+       var value2 = 1;
+       var value3 = 0;
+       
+       //Using interpolated strings and Orlum.Text.Format.NP function
+       Console.WriteLine(Format.NumericalPhrase($"{value1:NP;RU;Запрошен;Запрошено;Запрошено} {value1} {value1:NP;RU;рубль;рубля;рублей}"));
+       Console.WriteLine(Format.NumericalPhrase($"{value2:NP;RU;Запрошен;Запрошено;Запрошено} {value2} {value2:NP;RU;рубль;рубля;рублей}"));
+       Console.WriteLine(Format.NumericalPhrase($"{value3:NP;RU;Запрошен;Запрошено;Запрошено} {value3} {value3:NP;RU;рубль;рубля;рублей}"));
+       
+       //Using regular format strings and Orlum.Text.Format.NumericalPhrase function
+       Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value1));
+       Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value2));
+       Console.WriteLine(Format.NumericalPhrase("{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value3));
+       Console.WriteLine();
+       
+       //Using regular format strings and System.String.Format function
+       Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value1));
+       Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value2));
+       Console.WriteLine(string.Format(new NumericalPhraseFormatter(), "{0:NP;RU;Запрошен;Запрошено;Запрошено} {0} {0:NP;RU;рубль;рубля;рублей}", value3));
+       Console.WriteLine();
+   }
 }
-    
+
 /*
-This code produces the following output.
-     
-Запрошено 3.5 рубля
+This code produces the following output:
+
+Запрошено 3,5 рубля
 Запрошен 1 рубль
 Запрошено 0 рублей
-Requested 3.5 rubles
-Requested 1 ruble
-Requested 0 rubles
-Zażądano 3.5 rubla
-Zażądano 1 rubel
-Zażądano 0 rubli
-     
+       
+Запрошено 3,5 рубля
+Запрошен 1 рубль
+Запрошено 0 рублей
+       
+Запрошено 3,5 рубля
+Запрошен 1 рубль
+Запрошено 0 рублей
+
 */
 ```
 
