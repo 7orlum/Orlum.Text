@@ -31,13 +31,14 @@ namespace Orlum.Text
         public GrammaticalNumber MatchGrammaticalNumber(double number)
         {
             var isInteger = Math.Truncate(number) == number;
-            
-            var result = (isInteger, Math.Abs(number)) switch
+
+            var result = (isInteger, Math.Abs(number), Math.Abs(number) % 100, Math.Abs(number) % 10) switch
             {
-                (true, 1) => GrammaticalNumber.Singular,
-                (true, > 1 and < 5) => GrammaticalNumber.Paucal,
-                (true, _) => GrammaticalNumber.Plural,
-                (false, _) => GrammaticalNumber.Fractional
+                (true, 1, _, _) => GrammaticalNumber.Singular,
+                (true, _, >= 10 and <= 19, _) => GrammaticalNumber.Plural,
+                (true, _, _, >= 2 and <= 4) => GrammaticalNumber.Paucal,
+                (true, _, _, _) => GrammaticalNumber.Plural,
+                (false, _, _, _) => GrammaticalNumber.Fractional
             };
 
             if (!GrammaticalNumbers.Contains(result))

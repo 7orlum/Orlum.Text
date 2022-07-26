@@ -21,7 +21,7 @@ namespace Orlum.Text.Tests.Unit
         [InlineData(GrammaticalNumber.Plural, 12)]
         [InlineData(GrammaticalNumber.Plural, 14)]
         [InlineData(GrammaticalNumber.Plural, 21)]
-        [InlineData(GrammaticalNumber.Plural, 22)]
+        [InlineData(GrammaticalNumber.Paucal, 22)]
         [InlineData(GrammaticalNumber.Plural, 91)]
         [InlineData(GrammaticalNumber.Plural, 111)]
         internal void FindsConcordForm(GrammaticalNumber expected, double number)

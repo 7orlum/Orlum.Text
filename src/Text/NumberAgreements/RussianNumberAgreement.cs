@@ -36,9 +36,9 @@ namespace Orlum.Text
 
             GrammaticalNumber result = (isInteger, Math.Abs(number) % 100, Math.Abs(number) % 10) switch
             {
-                (true, > 10 and < 20, _) => GrammaticalNumber.Plural,
+                (true, >= 11 and <= 19, _) => GrammaticalNumber.Plural,
                 (true, _, 1) => GrammaticalNumber.Singular,
-                (true, _, > 1 and < 5) => GrammaticalNumber.Paucal,
+                (true, _, >= 2 and <= 4) => GrammaticalNumber.Paucal,
                 (true, _, _) => GrammaticalNumber.Plural,
                 (false, _, _) => GrammaticalNumber.Paucal
             };
